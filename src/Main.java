@@ -7,4 +7,18 @@ public class Main {
     public static void main(String[] args) {
 
     }
+
+    public static  void viewAvailableBooks () {
+        System.out.println("Kitap İsmi   -   Yazar İsmi   -   Sayfa Sayısı");
+        for (int i = 0; i < books.length; i++) {
+            for (int j = 0; j < books[i].length; j++) {
+                System.out.print(books[i][j]);
+                if (j < books[i].length - 1) {
+                    System.out.print(" - ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
 }
