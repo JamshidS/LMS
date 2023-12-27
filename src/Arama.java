@@ -1,6 +1,15 @@
 import java.util.Scanner;
 public class Arama {
-    public static void searchBooks(Scanner scanner) {
+    public static void main(String[] args) {
+        Scanner scr = new Scanner(System.in);
+        System.out.println("Arama yapmak için aşağıdaki seçeneklerden birini seçin:");
+        System.out.println("1. Başlık ile arama");
+        System.out.println("2. Yazar ile arama");
+        System.out.println("3. ISBN ile arama");
+
+       searchBooks(scr);
+    }
+ public static void searchBooks(Scanner scanner) {
         String[] kitapismi = {"Sefiller", "Hayvan Çiftliği"};
         String[] yazar = {"Victor Hugo", "George Orwell"};
         int[] isbn = {1, 2};
@@ -62,18 +71,6 @@ public class Arama {
                 break;
         }
     }
-
-        
-    public static void main(String[] args) {
-        Scanner scr = new Scanner(System.in);
-        System.out.println("Arama yapmak için aşağıdaki seçeneklerden birini seçin:");
-        System.out.println("1. Başlık ile arama");
-        System.out.println("2. Yazar ile arama");
-        System.out.println("3. ISBN ile arama");
-
-
-
-        searchBooks(scr);
-    }
+    
 }
 
