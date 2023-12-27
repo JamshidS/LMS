@@ -1,6 +1,10 @@
 import java.util.Scanner;
 public class kitapİadeİşlemi {
-    private static String[] kitapIsimleri = {"no2", "no2", "no2", "no2", "no2"};
+
+    public static void main(String[] args) {
+        kitapİadeİşlemi();
+    }
+      private static String[] kitapIsimleri = {"no2", "no2", "no2", "no2", "no2"};
     private static int[] kitapMiktarlari = {1, 2, 3, 4, 5};
     public static String kitapİadeİşlemi() {
         Scanner scr = new Scanner(System.in);
@@ -31,9 +35,5 @@ public class kitapİadeİşlemi {
         return kitapİadeİşlemi();
     }
 
-
-    public static void main(String[] args) {
-        kitapİadeİşlemi();
-    }
 }
 
