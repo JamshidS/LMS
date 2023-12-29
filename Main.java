@@ -1,8 +1,7 @@
-import java.util.Scanner;
 
-public class KütüphaneSistemi {
 
-    Scanner scan = new Scanner(System.in);
+public class Main {
+
 
 
     final static int INDEX = 20;
