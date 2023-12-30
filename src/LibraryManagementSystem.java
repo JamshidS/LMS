@@ -1,4 +1,4 @@
-public class Main {
+public class LibraryManagementSystem {
     static int INDEX = 20;
     static String[][] books = new String[INDEX][4];
     static String[][] patrons = new String[INDEX][4];
