@@ -1,7 +1,6 @@
 public class libraryManagementSystem {
 
     int customerIndex = -1;
-
     public void custemerToDeleted(String customerToDelete) {
         for (int i = 0; i < patrons.length; i++) {
             String customerTc = patrons[i][2];
@@ -22,12 +21,18 @@ public class libraryManagementSystem {
                     }
 
                 }
-
+                patrons=newPatrons;
 
             }
         }
 
     }
+
+
+
+
+
+
 
 
 
