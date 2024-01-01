@@ -47,5 +47,22 @@ public class LibraryManagementSystem {
             System.out.println();
         }
     }
+    public static void generateReports() {
 
+        if (bookQuantity==0){
+            System.out.println("Kütühanede kitap sayısı 0'dır.");
+        }
+        else {
+            System.out.printf("%-20s %-20s %-20s %-20s%n", "Kitap İsmi", "Yazar İsmi","Kitap Sayfası", "ISBN");
+            for (int i = 0; i < bookQuantity; i++) {
+                System.out.printf("%-20s %-20s %-20s %-20s%n",books[i][0],books[i][1],books[i][2],books[i][3]);
+            }
+            System.out.println();
+            int totalBooks = 0;
+            for (int i = 0; i < bookQuantity; i++) {
+                totalBooks++;
+            }
+            System.out.println("Toplam kitap sayısı : " + totalBooks);
+        }
+    }
 }
