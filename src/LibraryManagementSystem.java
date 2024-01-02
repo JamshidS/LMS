@@ -47,5 +47,12 @@ public class LibraryManagementSystem {
             System.out.println();
         }
     }
-
+    public static boolean bookAvaible(String ISBN){
+        for (int i=0; i<bookQuantity; i++){
+            if (books[i][3].equals(ISBN)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
