@@ -144,5 +144,14 @@ public class Main {
         }
         return kitapİadeİşlemi();
     }
+private static int[] countTotalBooks(){
+    int totalBooks = 0;
+    for (int i = 0; i < bookQuantity; i++) {
+        totalBooks += Integer.parseInt(books[i][3]);
+    }
+    System.out.println("Toplam " + totalBooks + " kitap bulunmaktadır.");
+
+ return countTotalBooks();
+}
 
 }
