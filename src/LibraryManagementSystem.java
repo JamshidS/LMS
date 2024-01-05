@@ -4,6 +4,27 @@ public class LibraryManagementSystem {
     static String[][] patrons = new String[INDEX][4];
     static String[][] transactions = new String[INDEX][3];
     static int bookQuantity=0;
+
+    int increase = 0;//transaciona bilgileri aktarma
+    public void checkOutBook(String Tc, String bookISBN, String history) {
+
+        if (patrons.length > increase) {
+            transactions[increase][0] = patrons[2][2];
+            transactions[increase][1] = bookISBN;
+            transactions[increase][2] = history;
+            increase++;
+            System.out.println("Book purchase has been successfully recorded");
+        } else {
+            System.out.println("Adding a book did not work. Try again.");
+        }
+
+
+    }
+
+
+
+
+
     public static void addBook(String title,String author,String bookPage,String ISBN){
         if (bookQuantity<books.length){
             books[bookQuantity][0]=title;
@@ -57,6 +78,10 @@ public class LibraryManagementSystem {
         }
 
     }
+
+
+
+
     public static void main(String[] args) {
         System.out.println("Merhaba");
     }
