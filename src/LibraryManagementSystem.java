@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class LibraryManagementSystem {
     static int INDEX = 20;
     static String[][] books = new String[INDEX][4];
@@ -103,5 +105,67 @@ public class LibraryManagementSystem {
         return false;
     }
 
+    private static String[] bookTitles = {"Les Misérables", "Animal Farm"};
+    private static String[] authors = {"Victor Hugo", "George Orwell"};
+    private static int[] isbns = {1, 2};
+    private static int[] pageCounts = {1724, 152};
 
+    public static void searchBooks() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Choose one of the options below for searching:");
+        System.out.println("1. Search by Title");
+        System.out.println("2. Search by Author");
+        System.out.println("3. Search by ISBN");
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+        switch (choice) {
+            case 1:
+                System.out.print("Enter title: ");
+                String titleSearch = scanner.nextLine();
+                for (int i = 0; i < bookTitles.length; i++) {
+                    if (bookTitles[i].equalsIgnoreCase(titleSearch)) {
+                        System.out.println("Book Found:");
+                        System.out.println("Title: " + bookTitles[i]);
+                        System.out.println("Author: " + authors[i]);
+                        System.out.println("ISBN: " + isbns[i]);
+                        System.out.println("Page Count: " + pageCounts[i]);
+                        return;
+                    }
+                }
+                System.out.println("Book not found.");
+                break;
+            case 2:
+                System.out.print("Enter author name: ");
+                String authorSearch = scanner.nextLine();
+                for (int i = 0; i < authors.length; i++) {
+                    if (authors[i].equalsIgnoreCase(authorSearch)) {
+                        System.out.println("Book Found:");
+                        System.out.println("Title: " + bookTitles[i]);
+                        System.out.println("Author: " + authors[i]);
+                        System.out.println("ISBN: " + isbns[i]);
+                        System.out.println("Page Count: " + pageCounts[i]);
+                        return;
+                    }
+                }
+                System.out.println("Book not found.");
+                break;
+            case 3:
+                System.out.print("Enter ISBN: ");
+                int isbnSearch = scanner.nextInt();
+                for (int i = 0; i < isbns.length; i++) {
+                    if (isbns[i] == isbnSearch) {
+                        System.out.println("Book Found:");
+                        System.out.println("Title: " + bookTitles[i]);
+                        System.out.println("Author: " + authors[i]);
+                        System.out.println("ISBN: " + isbns[i]);
+                        System.out.println("Page Count: " + pageCounts[i]);
+                        return;
+                    }
+                }
+                System.out.println("Book not found.");
+                break;
+
+            default:
+        }
+    }
 }
