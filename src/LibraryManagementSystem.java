@@ -21,6 +21,7 @@ public class LibraryManagementSystem {
             }
             newBookList[bookQuantity][0]=title;
             newBookList[bookQuantity][1]=author;
+
             newBookList[bookQuantity][2]=bookPage;
             newBookList[bookQuantity][3]=ISBN;
 
@@ -30,6 +31,8 @@ public class LibraryManagementSystem {
 
         }
     }
+
+
     public static void main(String[] args) {
         System.out.println("Merhaba");
     }
