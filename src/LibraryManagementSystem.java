@@ -30,6 +30,56 @@ public class LibraryManagementSystem {
 
         }
     }
+
+    public void checkOutBook(String name, String surName, String tc, String bookName, String writer,String bookISBN,String history) {
+
+
+        if (bookQuantity < patrons.length) {
+            patrons[bookQuantity][0] = name;
+            patrons[bookQuantity][1] = surName;
+            patrons[bookQuantity][2] = tc;
+            patrons[bookQuantity][3] = bookName;
+            patrons[bookQuantity][4] = writer;
+            patrons[bookQuantity][5] = bookISBN;;
+            bookQuantity++;
+
+            //aranılan obje bulma /
+            boolean bookkk=false;
+            for (String[] book : books){
+                if (book[0].equalsIgnoreCase(bookName)){
+                    System.out.println(book[0]+" isimli kitap vardır.Yazarı :"+book[1]);
+                    bookkk=true;
+
+                    if (patrons.length > bookQuantity) {
+                        transactions[bookQuantity][0] = patrons[2][2];
+                        transactions[bookQuantity][1] = bookISBN;
+                        transactions[bookQuantity][2] = history;
+                        bookQuantity++;
+                        System.out.println("Book purchase has been successfully recorded");
+
+                    } else {
+                        System.out.println("Adding a book did not work. Try again.");
+                    }
+
+                }
+            }
+            if (!bookkk){
+                System.out.println(" ");
+            }
+        } else {
+            String[][] newwpatrons = new String[patrons.length + 1][4];
+            for (int i = 0; i < newwpatrons.length; i++) {
+                for (int j = 0; j < 4; j++) {
+                    newwpatrons[i][j] = patrons[i][j];
+                }
+            }
+            System.out.println("Name added :" + patrons[bookQuantity][0]);
+            newwpatrons[bookQuantity][0] = name;
+            bookQuantity++;
+            patrons[bookQuantity][0] = newwpatrons[bookQuantity][0];
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("Merhaba");
     }
