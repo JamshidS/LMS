@@ -33,6 +33,7 @@ public class LibraryManagementSystem {
     }
 
 
+
     public static void main(String[] args) {
         System.out.println("Merhaba");
     }
@@ -65,7 +66,36 @@ public class LibraryManagementSystem {
             System.out.println("Toplam kitap sayısı : " + totalBooks);
         }
     }
+    static int userListİndex =-1;
+    public static String updatePatronInfo(String updateSearchPatronTC, String updateName, String updateSurname, String updateTC, String updateWriter, String upadateBookISBN){
 
+        for (int i =0;i< patrons.length;i++){
+            String searchPatrons = patrons[i][2];
+            userListİndex =i;
+            if (searchPatrons.equalsIgnoreCase(updateSearchPatronTC)){
+                System.out.println("User name            :"+patrons[userListİndex][0]);
+                System.out.println("Patron surname       :"+patrons[userListİndex][1]);
+                System.out.println("User found T.C       :"+patrons[userListİndex][2]);
+                System.out.println("Received book        :"+patrons[userListİndex][3]);
+                System.out.println("Received book writer :"+patrons[userListİndex][4]);
+                System.out.println("Received bookISBN    :"+patrons[userListİndex][5]);
+                System.out.println();
+
+                System.out.println("Enter current user information.");
+                patrons[userListİndex][0] = updateName;
+                patrons[userListİndex][1] = updateSurname;
+                patrons[userListİndex][2] = updateTC;
+                patrons[userListİndex][3] = updateWriter;
+                patrons[userListİndex][4] = upadateBookISBN;
+
+                for (int j = 0; j < patrons[userListİndex].length; j++){
+                    patrons[i][j]=patrons[userListİndex][j];
+                }
+                System.out.println("The update was successful.");
+            }
+        }
+        return "";
+    }
 
     public static void deleteBook(String ISBN) {
         int findIndex = -1;
