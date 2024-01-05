@@ -4,7 +4,6 @@ public class LibraryManagementSystem {
     static String[][] patrons = new String[INDEX][4];
     static String[][] transactions = new String[INDEX][3];
     static int bookQuantity=0;
-
     public static void addBook(String title,String author,String bookPage,String ISBN){
         if (bookQuantity<books.length){
             books[bookQuantity][0]=title;
@@ -32,7 +31,7 @@ public class LibraryManagementSystem {
         }
     }
     public static void main(String[] args) {
-
+        System.out.println("Merhaba");
     }
 
     public static  void viewAvailableBooks () {
@@ -65,35 +64,35 @@ public class LibraryManagementSystem {
     }
 
 
-    public static void deleteBook(String ISBN){
-        int findIndex=-1;
-        if (bookQuantity==0){
+    public static void deleteBook(String ISBN) {
+        int findIndex = -1;
+        if (bookQuantity == 0) {
             System.out.println("Kütühanede kitap sayısı 0'dır.");
         }
-        for (int i=0; i<bookQuantity; i++) {
+        for (int i = 0; i < bookQuantity; i++) {
             if (books[i][3].equals(ISBN)) {
                 findIndex = i;
                 break;
             }
         }
-        if (findIndex!=-1){
-            for (int i=findIndex; i<bookQuantity-1; i++){
-                books[i]=books[i+1];
+        if (findIndex != -1) {
+            for (int i = findIndex; i < bookQuantity - 1; i++) {
+                books[i] = books[i + 1];
             }
             bookQuantity--;
-            String[][] newBooks=new String[books.length][4];
-            for (int i=0; i<books.length; i++){
-                for (int j=0; j<books[i].length; j++){
-                    newBooks[i][j]=books[i][j];
+            String[][] newBooks = new String[books.length][4];
+            for (int i = 0; i < books.length; i++) {
+                for (int j = 0; j < books[i].length; j++) {
+                    newBooks[i][j] = books[i][j];
                 }
             }
-            books=newBooks;
+            books = newBooks;
             System.out.println("Kitap Silinmiştir.");
-        }
-        else {
+        } else {
             System.out.println("Silmek isteğiniz kitap bulunmamaktadır.");
 
         }
+    }
   
     public static boolean bookAvaible(String ISBN){
         for (int i=0; i<bookQuantity; i++){
