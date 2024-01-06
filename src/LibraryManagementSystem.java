@@ -31,16 +31,16 @@ public class LibraryManagementSystem {
         }
     }
 
-    public void checkOutBook(String name, String surName, String tc, String bookName, String writer,String bookISBN,String date) {
+    public static void checkOutBook(String name, String surName, String tc, String bookName, String writer,String bookISBN,String date) {
 
 
         if (bookQuantity < patrons.length) {
-            patrons[bookQuantity][0] = name;
+            patrons[bookQuantity][0] = name; // isim soyisim
             patrons[bookQuantity][1] = surName;
             patrons[bookQuantity][2] = tc;
             patrons[bookQuantity][3] = bookName;
-            patrons[bookQuantity][4] = writer;
-            patrons[bookQuantity][5] = bookISBN;
+           // patrons[bookQuantity][4] = writer;
+           /* patrons[bookQuantity][5] = bookISBN;*/
             bookQuantity++;
 
             //aranılan obje bulma /
@@ -81,7 +81,7 @@ public class LibraryManagementSystem {
     }
 
     public static void main(String[] args) {
-        System.out.println("Merhaba");
+        checkOutBook("Emre","Aybar","564674448574","Sefiller","VH","ahskjdh4788","06/01/2024");
     }
 
     public static  void viewAvailableBooks () {
