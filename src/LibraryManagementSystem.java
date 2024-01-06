@@ -1,3 +1,6 @@
+import java.sql.SQLOutput;
+import java.util.Scanner;
+
 public class LibraryManagementSystem {
     static int INDEX = 20;
     static String[][] books = new String[INDEX][4];
@@ -103,5 +106,23 @@ public class LibraryManagementSystem {
         return false;
     }
 
+
+    public static void bookview (String bookName){
+
+        boolean kitapBulundu = false;
+        for (int i =0; i< books.length;i++){
+            if(bookName.equals(books[i][0])){
+                kitapBulundu = true;
+                System.out.println("Kitap Adı: "+books[i][0]);
+                System.out.println("Yazarı: "+books[i][1]);
+                System.out.println("Sayfa Sayısı: "+books[i][2]);
+                break;
+            }
+        }
+        if (!kitapBulundu){
+            System.out.println("İstediğiniz kitap kütüphanemizde bulunmamaktadır.");
+        }
+
+    }
 
 }
