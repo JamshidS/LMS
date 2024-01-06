@@ -31,7 +31,7 @@ public class LibraryManagementSystem {
         }
     }
 
-    public void checkOutBook(String name, String surName, String tc, String bookName, String writer,String bookISBN,String history) {
+    public void checkOutBook(String name, String surName, String tc, String bookName, String writer,String bookISBN,String date) {
 
 
         if (bookQuantity < patrons.length) {
@@ -40,7 +40,7 @@ public class LibraryManagementSystem {
             patrons[bookQuantity][2] = tc;
             patrons[bookQuantity][3] = bookName;
             patrons[bookQuantity][4] = writer;
-            patrons[bookQuantity][5] = bookISBN;;
+            patrons[bookQuantity][5] = bookISBN;
             bookQuantity++;
 
             //aranılan obje bulma /
@@ -53,7 +53,7 @@ public class LibraryManagementSystem {
                     if (patrons.length > bookQuantity) {
                         transactions[bookQuantity][0] = patrons[2][2];
                         transactions[bookQuantity][1] = bookISBN;
-                        transactions[bookQuantity][2] = history;
+                        transactions[bookQuantity][2] = date;
                         bookQuantity++;
                         System.out.println("Book purchase has been successfully recorded");
 
