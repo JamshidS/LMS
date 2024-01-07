@@ -124,5 +124,19 @@ public class LibraryManagementSystem {
         }
 
     }
+    public static void hataliGiris (String id, String sifre){
+        boolean girisBasarili = false;
+        for (int i=0; i<patrons.length;i++) {
+            if (id.equals(patrons[i][0]) && sifre.equals(patrons[i][1])) {
+                girisBasarili = true;
+                System.out.println("Giriş Başarılı");
+                break;
+            }
+        }
+        if (!girisBasarili){
+            System.out.println("Giriş Başarısız");
+        }
+
+    }
 
 }
