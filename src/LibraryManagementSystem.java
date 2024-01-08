@@ -5,38 +5,39 @@ public class LibraryManagementSystem {
     static String[][] books = new String[INDEX][4];
     static String[][] patrons = new String[INDEX][4];
     static String[][] transactions = new String[INDEX][3];
-    static int bookQuantity=0;
-    public static void addBook(String title,String author,String bookPage,String ISBN){
-        if (bookQuantity<books.length){
-            books[bookQuantity][0]=title;
-            books[bookQuantity][1]=author;
-            books[bookQuantity][2]=bookPage;
-            books[bookQuantity][3]=ISBN;
+    static int bookQuantity = 0;
+
+    public static void addBook(String title, String author, String bookPage, String ISBN) {
+        if (bookQuantity < books.length) {
+            books[bookQuantity][0] = title;
+            books[bookQuantity][1] = author;
+            books[bookQuantity][2] = bookPage;
+            books[bookQuantity][3] = ISBN;
             bookQuantity++;
-        }
-        else {
-            String[][] newBookList=new String[books.length+1][4];
-            for (int i=0; i<books.length; i++){
-                for (int j=0; j<4; j++){
-                    newBookList[i][j]=books[i][j];
+        } else {
+            String[][] newBookList = new String[books.length + 1][4];
+            for (int i = 0; i < books.length; i++) {
+                for (int j = 0; j < 4; j++) {
+                    newBookList[i][j] = books[i][j];
                 }
             }
-            newBookList[bookQuantity][0]=title;
-            newBookList[bookQuantity][1]=author;
-            newBookList[bookQuantity][2]=bookPage;
-            newBookList[bookQuantity][3]=ISBN;
+            newBookList[bookQuantity][0] = title;
+            newBookList[bookQuantity][1] = author;
+            newBookList[bookQuantity][2] = bookPage;
+            newBookList[bookQuantity][3] = ISBN;
 
             bookQuantity++;
-            books=newBookList;
+            books = newBookList;
 
 
         }
     }
+
     public static void main(String[] args) {
         System.out.println("Merhaba");
     }
 
-    public static  void viewAvailableBooks () {
+    public static void viewAvailableBooks() {
         System.out.println("Kitap İsmi   -   Yazar İsmi   -   Sayfa Sayısı");
         for (int i = 0; i < books.length; i++) {
             for (int j = 0; j < books[i].length; j++) {
@@ -51,13 +52,12 @@ public class LibraryManagementSystem {
 
     public static void generateReports() {
         int totalBooks = 0;
-        if (bookQuantity==0){
+        if (bookQuantity == 0) {
             System.out.println("Kütühanede kitap sayısı 0'dır.");
-        }
-        else {
-            System.out.printf("%-20s %-20s %-20s %-20s%n", "Kitap İsmi", "Yazar İsmi","Kitap Sayfası", "ISBN");
+        } else {
+            System.out.printf("%-20s %-20s %-20s %-20s%n", "Kitap İsmi", "Yazar İsmi", "Kitap Sayfası", "ISBN");
             for (int i = 0; i < bookQuantity; i++) {
-                System.out.printf("%-20s %-20s %-20s %-20s%n",books[i][0],books[i][1],books[i][2],books[i][3]);
+                System.out.printf("%-20s %-20s %-20s %-20s%n", books[i][0], books[i][1], books[i][2], books[i][3]);
                 totalBooks++;
             }
             System.out.println();
@@ -95,77 +95,42 @@ public class LibraryManagementSystem {
 
         }
     }
-  
-    public static boolean bookAvaible(String ISBN){
-        for (int i=0; i<bookQuantity; i++){
-            if (books[i][3].equals(ISBN)){
+
+    public static boolean bookAvaible(String ISBN) {
+        for (int i = 0; i < bookQuantity; i++) {
+            if (books[i][3].equals(ISBN)) {
                 return true;
             }
         }
         return false;
     }
 
-    private static String[] bookTitles = {"Les Misérables", "Animal Farm"};
-    private static String[] authors = {"Victor Hugo", "George Orwell"};
-    private static int[] isbns = {1, 2};
-    private static int[] pageCounts = {1724, 152};
+    public static String bookReturn() {
+        Scanner scr = new Scanner(System.in);
+        System.out.println("İsminizi giriniz :");
+        String name = scr.nextLine();
 
-    public static void searchBooks() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Choose one of the options below for searching:");
-        System.out.println("1. Search by Title");
-        System.out.println("2. Search by Author");
-        System.out.println("3. Search by ISBN");
-        int choice = scanner.nextInt();
-        scanner.nextLine();
-        switch (choice) {
-            case 1:
-                System.out.print("Enter title: ");
-                String titleSearch = scanner.nextLine();
-                for (int i = 0; i < bookTitles.length; i++) {
-                    if (bookTitles[i].equalsIgnoreCase(titleSearch)) {
-                        System.out.println("Book Found:");
-                        System.out.println("Title: " + bookTitles[i]);
-                        System.out.println("Author: " + authors[i]);
-                        System.out.println("ISBN: " + isbns[i]);
-                        System.out.println("Page Count: " + pageCounts[i]);
-                        return;
-                    }
-                }
-                System.out.println("Book not found.");
-                break;
-            case 2:
-                System.out.print("Enter author name: ");
-                String authorSearch = scanner.nextLine();
-                for (int i = 0; i < authors.length; i++) {
-                    if (authors[i].equalsIgnoreCase(authorSearch)) {
-                        System.out.println("Book Found:");
-                        System.out.println("Title: " + bookTitles[i]);
-                        System.out.println("Author: " + authors[i]);
-                        System.out.println("ISBN: " + isbns[i]);
-                        System.out.println("Page Count: " + pageCounts[i]);
-                        return;
-                    }
-                }
-                System.out.println("Book not found.");
-                break;
-            case 3:
-                System.out.print("Enter ISBN: ");
-                int isbnSearch = scanner.nextInt();
-                for (int i = 0; i < isbns.length; i++) {
-                    if (isbns[i] == isbnSearch) {
-                        System.out.println("Book Found:");
-                        System.out.println("Title: " + bookTitles[i]);
-                        System.out.println("Author: " + authors[i]);
-                        System.out.println("ISBN: " + isbns[i]);
-                        System.out.println("Page Count: " + pageCounts[i]);
-                        return;
-                    }
-                }
-                System.out.println("Book not found.");
-                break;
+        System.out.println("Kitabın ismini giriniz :");
+        String bookname = scr.nextLine();
 
-            default:
+        System.out.println("Kitabın  numarasını  giriniz :");
+        int numarasi = scr.nextInt();
+
+        int kitapIndex = -1;
+        for (int i = 0; i < books.length; i++) {
+            if (books[i][0].equals(bookname) && i + 1 == numarasi) {
+                kitapIndex = i;
+                break;
+            }
         }
+        if (kitapIndex != -1 && Integer.parseInt(books[kitapIndex][2]) > 0) {
+            int currentQuantity = Integer.parseInt(books[kitapIndex][2]);// Mevcut stok miktarını alır.
+            books[kitapIndex][2] = String.valueOf(currentQuantity - 1); // Stok miktarını bir azaltır ve dizide günceller.
+            System.out.println("İşlem başarıyla tamamlandı. Kitap iade edildi.");
+            return String.valueOf(true);
+        } else {
+            System.out.println("Kitap iade edilemedi. Belirtilen isim ve numarada kitap bulunamadı veya stokta yok.");
+        }
+        return String.valueOf(false);
     }
 }
