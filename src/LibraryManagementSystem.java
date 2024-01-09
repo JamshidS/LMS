@@ -1,4 +1,5 @@
 import java.sql.SQLOutput;
+import java.util.Random;
 import java.util.Scanner;
 
 public class LibraryManagementSystem {
@@ -123,6 +124,42 @@ public class LibraryManagementSystem {
             System.out.println("İstediğiniz kitap kütüphanemizde bulunmamaktadır.");
         }
 
+    }
+    public static void generateBookRecommendations(String patronName) {
+        String patronISBN = null;
+        for (int i = 0; i < patrons.length; i++) {
+            if (patrons[i][0].equals(patronName) && patrons[i][3]!=null) {
+                patronISBN = patrons[i][3];
+                break;
+            }
+        }
+        if (patronISBN == null) {
+            Random random=new Random();
+            int randomIndex=random.nextInt(bookQuantity);
+            String recomTitle = books[randomIndex][0];
+            String recomAuthor = books[randomIndex][1];
+            String recomPageCount = books[randomIndex][2];
+            String recomISBN = books[randomIndex][3];
+            System.out.printf("Size önerilen kitap: \nBaşlık: %s, Yazar: %s, Sayfa Sayısı: %s, ISBN: %s",
+                    recomTitle, recomAuthor, recomPageCount, recomISBN);
+        }
+        else {
+            String bookAuthor=null;
+            for (int i=0; i<bookQuantity; i++){
+                if (books[i][3].equals(patronISBN)){
+                    bookAuthor=books[i][1];
+                }
+            }
+            System.out.println("Daha önce aldığınız kitaplara göre önerilen kitaplar : ");
+            for (int j = 0; j < bookQuantity; j++) {
+                if (books[j][1].equals(bookAuthor)) {
+                    System.out.println("Başlık: " + books[j][0] +
+                            ", Yazar: " + books[j][1] +
+                            ", Sayfa Sayısı: " + books[j][2] +
+                            ", ISBN: " + books[j][3]);
+                }
+            }
+        }
     }
 
 }
