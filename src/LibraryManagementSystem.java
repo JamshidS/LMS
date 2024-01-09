@@ -1,4 +1,6 @@
 import java.sql.SQLOutput;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class LibraryManagementSystem {
@@ -8,6 +10,50 @@ public class LibraryManagementSystem {
     static String[][] transactions = new String[INDEX][3];
     static int bookQuantity=0;
     static int patronQuantity = 0;
+    // kitap dönüş tarihi
+    private static String checkBookReturnDeadline(String bookISBN) {
+
+        for (int i = 0; i < patrons.length; i++) {
+            String bookIsbn = patrons[i][3];
+            if (bookIsbn != null) {
+                if (bookIsbn.equalsIgnoreCase(bookISBN)) {
+                    System.out.println(bookISBN + " book with ISBN number found.");
+
+                    LocalDate today = LocalDate.now();
+                    DateTimeFormatter format = DateTimeFormatter.ofPattern("d.M.yyyy");
+
+                    System.out.println("Book purchased date           : " + format.format(today).toUpperCase());
+                    LocalDate mustcome = today.plusDays(30);
+                    System.out.println("Date the book should arrive : " + format.format(mustcome));
+
+                    Scanner scan = new Scanner(System.in);
+                    System.out.print("Date the book arrived (enter d.m.yyyy format): ");
+                    String BookArrivalDate = scan.next();
+
+                    try {
+                        LocalDate BookArrivalDatestr = LocalDate.parse(BookArrivalDate, format);
+                        System.out.println("Book purchased date        : " + format.format(BookArrivalDatestr));
+
+                        if (BookArrivalDatestr.isAfter(mustcome)) {
+                            System.out.println("The book arrived later than it was supposed to arrive!");
+                            System.out.println("The user is prohibited from purchasing books for 1 month.");
+                        } else {
+                            System.out.println("The book was delivered before its due date.");
+                            System.out.println("User can buy books.");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Incorrect date format! Please enter a date in d.M.yyyy format.");
+                    }
+                } else {
+                    System.out.println("No record found for this Isbn. ");
+                    break;
+                }
+            } else
+                ;
+            break;
+        }
+        return " You can borrow the book.";
+    }
     public static String checkOutBook(String nameAndSurname, String tc, String bookName,String bookISBN) {
         if (patronQuantity < INDEX) {
             patrons[patronQuantity][0] = nameAndSurname.replaceAll(" ", "").toLowerCase();
@@ -73,6 +119,7 @@ public class LibraryManagementSystem {
         }
         return "The book purchase was successful.";
     }
+
 
     public static void addBook(String title,String author,String bookPage,String ISBN){
         if (bookQuantity<books.length){
