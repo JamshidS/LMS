@@ -7,6 +7,73 @@ public class LibraryManagementSystem {
     static String[][] patrons = new String[INDEX][4];
     static String[][] transactions = new String[INDEX][3];
     static int bookQuantity=0;
+    static int patronQuantity = 0;
+    public static String checkOutBook(String nameAndSurname, String tc, String bookName,String bookISBN) {
+        if (patronQuantity < INDEX) {
+            patrons[patronQuantity][0] = nameAndSurname.replaceAll(" ", "").toLowerCase();
+            patrons[patronQuantity][1] = tc;
+            patrons[patronQuantity][2] = bookName.replaceAll(" ", "").toLowerCase();
+            patrons[patronQuantity][3] = bookISBN;
+            patronQuantity++;
+
+            //aranılan obje bulma
+
+            boolean bookkk=false;
+            for (String[] book : books){
+                if (book[0].equalsIgnoreCase(bookName.toLowerCase())){
+                    System.out.println(book[0]+" there is a book called. The author is:"+book[1]);
+                    bookkk=true;
+
+                    if (patrons.length > patronQuantity) {
+                        transactions[patronQuantity][0] = patrons[patronQuantity][0];
+                        transactions[patronQuantity][1] = patrons[patronQuantity][1];
+                        transactions[patronQuantity][2] = patrons[patronQuantity][3];
+                        patronQuantity++;
+                        System.out.println("The book purchase was successful.");
+                        int bookIndex=-1;
+                        for (int i =0;i<books.length;i++){
+                            if (books[i][0].equalsIgnoreCase(bookName)){
+                                bookIndex=i;
+                                break;
+                            }
+                        }
+                        if (bookIndex!=-1){
+                            String[][] newBooks= new String[books.length-1][2];
+                            int  newIndex = 0;
+                            for (int i = 0 ;i< books.length;i++){
+                                if (i!=bookIndex){
+                                    newBooks[newIndex++]=books[i];
+                                }
+                            }
+                            books=newBooks;
+                            System.out.println("The list has been updated. ");
+
+                        }else {
+                            System.out.println("Error finding in book Try again.");
+                        }
+                    } else {
+                        System.out.println("Error finding in book Try again.");
+                    }
+                }
+            }
+            if (!bookkk){
+                System.out.println("There is no such book in our library. ");
+            }
+        } else {
+            String[][] newwpatrons = new String[INDEX + 1][4];
+            for (int i = 0; i < newwpatrons.length; i++) {
+                for (int j = 0; j < 4; j++) {
+                    newwpatrons[i][j] = patrons[i][j];
+                }
+            }
+            System.out.println("Name added :" + patrons[patronQuantity][0]);
+            newwpatrons[patronQuantity][0] = nameAndSurname;
+            patronQuantity++;
+            patrons[patronQuantity][0] = newwpatrons[patronQuantity][0];
+        }
+        return "The book purchase was successful.";
+    }
+
     public static void addBook(String title,String author,String bookPage,String ISBN){
         if (bookQuantity<books.length){
             books[bookQuantity][0]=title;
