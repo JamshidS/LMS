@@ -145,9 +145,9 @@ public class LibraryManagementSystem {
             }
         }
         if (kitapIndex != -1) {
-            int currentQuantity = Integer.parseInt(books[kitapIndex][2]);// Mevcut stok miktarını alır.
+            int currentQuantity = Integer.parseInt(books[kitapIndex][2]);
             if (currentQuantity > 0) {
-                books[kitapIndex][2] = String.valueOf(currentQuantity - 1); // Stok miktarını bir azaltır ve dizide günceller.
+                books[kitapIndex][2] = String.valueOf(currentQuantity - 1); 
                 System.out.println("İşlem başarıyla tamamlandı. Kitap iade edildi.");
                 return "İşlem başarıyla tamamlandı. Kitap iade edildi.";
 
