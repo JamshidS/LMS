@@ -96,7 +96,15 @@ public class LibraryManagementSystem {
 
         }
     }
-  
+    public static void truncateBooksArrayOnDeletion(){
+        String[][] newBooks=new String[books.length][4];
+        for (int i=0; i<books.length; i++){
+            for (int j=0; j<books[i].length; j++){
+                newBooks[i][j]=books[i][j];
+            }
+        }
+        books=newBooks;
+    }
     public static boolean bookAvaible(String ISBN){
         for (int i=0; i<bookQuantity; i++){
             if (books[i][3].equals(ISBN)){
