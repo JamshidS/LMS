@@ -34,7 +34,8 @@ public class LibraryManagementSystem {
     }
 
     public static void main(String[] args) {
-        System.out.println("Merhaba");
+
+
     }
 
     public static void viewAvailableBooks() {
@@ -105,32 +106,42 @@ public class LibraryManagementSystem {
         return false;
     }
 
-    public static String bookReturn() {
-        Scanner scr = new Scanner(System.in);
-        System.out.println("İsminizi giriniz :");
-        String name = scr.nextLine();
+    public static void bookview(String bookName) {
+        boolean kitapBulundu = false;
 
-        System.out.println("Kitabın ismini giriniz :");
-        String bookname = scr.nextLine();
-
-        System.out.println("Kitabın  numarasını  giriniz :");
-        int numarasi = scr.nextInt();
-
-        int kitapIndex = -1;
         for (int i = 0; i < books.length; i++) {
-            if (books[i][0].equals(bookname) && i + 1 == numarasi) {
-                kitapIndex = i;
+            if (bookName.equals(books[i][0])) {
+                kitapBulundu = true;
+                System.out.println("Kitap Adı: " + books[i][0]);
+                System.out.println("Yazarı: " + books[i][1]);
+                System.out.println("Sayfa Sayısı: " + books[i][2]);
                 break;
             }
         }
-        if (kitapIndex != -1 && Integer.parseInt(books[kitapIndex][2]) > 0) {
-            int currentQuantity = Integer.parseInt(books[kitapIndex][2]);// Mevcut stok miktarını alır.
-            books[kitapIndex][2] = String.valueOf(currentQuantity - 1); // Stok miktarını bir azaltır ve dizide günceller.
-            System.out.println("İşlem başarıyla tamamlandı. Kitap iade edildi.");
-            return String.valueOf(true);
-        } else {
-            System.out.println("Kitap iade edilemedi. Belirtilen isim ve numarada kitap bulunamadı veya stokta yok.");
+        if (!kitapBulundu) {
+            System.out.println("İstediğiniz kitap kütüphanemizde bulunmamaktadır.");
         }
-        return String.valueOf(false);
+    }
+
+    public static void searchBooks() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Arama kriteri giriniz: ");
+        String aramakriteri = scanner.nextLine();
+
+        boolean found = false;
+
+        for (int i = 0; i < bookQuantity; i++) {
+            if (books[i][0].equalsIgnoreCase(aramakriteri) || books[i][1].equalsIgnoreCase(aramakriteri) || books[i][2].equalsIgnoreCase(aramakriteri)) {
+                System.out.println("Kitap Bulundu!");
+                System.out.println("Kitap ID: " + books[i][3]);
+                System.out.println("Başlık: " + books[i][0]);
+                System.out.println("Yazar: " + books[i][1]);
+                System.out.println("ISBN: " + books[i][2]);
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("Kitap bulunamadı.");
+        }
     }
 }
