@@ -1,6 +1,4 @@
 import java.sql.SQLOutput;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class LibraryManagementSystem {
@@ -10,51 +8,10 @@ public class LibraryManagementSystem {
     static String[][] transactions = new String[INDEX][3];
     static int bookQuantity=0;
     static int patronQuantity = 0;
-    // kitap dönüş tarihi
-    private static String checkBookReturnDeadline(String bookISBN) {
 
-        for (int i = 0; i < patrons.length; i++) {
-            String bookIsbn = patrons[i][3];
-            if (bookIsbn != null) {
-                if (bookIsbn.equalsIgnoreCase(bookISBN)) {
-                    System.out.println(bookISBN + " book with ISBN number found.");
 
-                    LocalDate today = LocalDate.now();
-                    DateTimeFormatter format = DateTimeFormatter.ofPattern("d.M.yyyy");
 
-                    System.out.println("Book purchased date           : " + format.format(today).toUpperCase());
-                    LocalDate mustcome = today.plusDays(30);
-                    System.out.println("Date the book should arrive : " + format.format(mustcome));
-
-                    Scanner scan = new Scanner(System.in);
-                    System.out.print("Date the book arrived (enter d.m.yyyy format): ");
-                    String BookArrivalDate = scan.next();
-
-                    try {
-                        LocalDate BookArrivalDatestr = LocalDate.parse(BookArrivalDate, format);
-                        System.out.println("Book purchased date        : " + format.format(BookArrivalDatestr));
-
-                        if (BookArrivalDatestr.isAfter(mustcome)) {
-                            System.out.println("The book arrived later than it was supposed to arrive!");
-                            System.out.println("The user is prohibited from purchasing books for 1 month.");
-                        } else {
-                            System.out.println("The book was delivered before its due date.");
-                            System.out.println("User can buy books.");
-                        }
-                    } catch (Exception e) {
-                        System.out.println("Incorrect date format! Please enter a date in d.M.yyyy format.");
-                    }
-                } else {
-                    System.out.println("No record found for this Isbn. ");
-                    break;
-                }
-            } else
-                ;
-            break;
-        }
-        return " You can borrow the book.";
-    }
-    public static String checkOutBook(String nameAndSurname, String tc, String bookName,String bookISBN) {
+    public static String checkOutBook(String nameAndSurname, String tc, String bookName, String bookISBN) {
         if (patronQuantity < INDEX) {
             patrons[patronQuantity][0] = nameAndSurname.replaceAll(" ", "").toLowerCase();
             patrons[patronQuantity][1] = tc;
@@ -64,11 +21,11 @@ public class LibraryManagementSystem {
 
             //aranılan obje bulma
 
-            boolean bookkk=false;
-            for (String[] book : books){
-                if (book[0].equalsIgnoreCase(bookName.toLowerCase())){
-                    System.out.println(book[0]+" there is a book called. The author is:"+book[1]);
-                    bookkk=true;
+            boolean bookkk = false;
+            for (String[] book : books) {
+                if (book[0].equalsIgnoreCase(bookName.trim())) {
+                    System.out.println(book[0] + " there is a book called. The author is:" + book[1]);
+                    bookkk = true;
 
                     if (patrons.length > patronQuantity) {
                         transactions[patronQuantity][0] = patrons[patronQuantity][0];
@@ -76,25 +33,26 @@ public class LibraryManagementSystem {
                         transactions[patronQuantity][2] = patrons[patronQuantity][3];
                         patronQuantity++;
                         System.out.println("The book purchase was successful.");
-                        int bookIndex=-1;
-                        for (int i =0;i<books.length;i++){
-                            if (books[i][0].equalsIgnoreCase(bookName)){
-                                bookIndex=i;
+
+                        int bookIndex = -1;
+                        for (int i = 0; i < books.length; i++) {
+                            if (books[i][0].equalsIgnoreCase(bookName)) {
+                                bookIndex = i;
                                 break;
                             }
                         }
-                        if (bookIndex!=-1){
-                            String[][] newBooks= new String[books.length-1][2];
-                            int  newIndex = 0;
-                            for (int i = 0 ;i< books.length;i++){
-                                if (i!=bookIndex){
-                                    newBooks[newIndex++]=books[i];
+                        if (bookIndex != -1) {
+                            String[][] newBooks = new String[books.length - 1][2];
+                            int newIndex = 0;
+                            for (int i = 0; i < books.length; i++) {
+                                if (i != bookIndex) {
+                                    newBooks[newIndex++] = books[i];
                                 }
                             }
-                            books=newBooks;
+                            books = newBooks;
                             System.out.println("The list has been updated. ");
 
-                        }else {
+                        } else {
                             System.out.println("Error finding in book Try again.");
                         }
                     } else {
@@ -102,7 +60,7 @@ public class LibraryManagementSystem {
                     }
                 }
             }
-            if (!bookkk){
+            if (!bookkk) {
                 System.out.println("There is no such book in our library. ");
             }
         } else {
@@ -119,6 +77,7 @@ public class LibraryManagementSystem {
         }
         return "The book purchase was successful.";
     }
+
 
 
     public static void addBook(String title,String author,String bookPage,String ISBN){
