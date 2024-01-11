@@ -123,8 +123,6 @@ public class LibraryManagementSystem {
         }
 
     }
-
-
     public static void updateBook(String ISBN, String title, String author, String bookPage) {
         boolean kitapBulundu = false;
         for (int i = 0; i < bookQuantity; i++) {
@@ -164,9 +162,11 @@ public class LibraryManagementSystem {
 
         }
 
+
         return searchBooks();
 
     }
 }
+
 
 
