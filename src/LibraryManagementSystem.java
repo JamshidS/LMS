@@ -108,7 +108,6 @@ public class LibraryManagementSystem {
 
 
     public static void bookview (String bookName){
-
         boolean kitapBulundu = false;
         for (int i =0; i< books.length;i++){
             if(bookName.equals(books[i][0])){
