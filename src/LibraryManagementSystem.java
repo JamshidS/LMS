@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class LibraryManagementSystem {
@@ -141,8 +142,6 @@ public class LibraryManagementSystem {
         }
     }
     public static int countTotalBooks() {
-
-
 
         return bookQuantity;
 
