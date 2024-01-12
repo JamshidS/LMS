@@ -125,29 +125,29 @@ public class LibraryManagementSystem {
         }
 
     }
-    public static void generateBookRecommendations(String patronName) {
-        String patronISBN = null;
-        for (int i = 0; i < patrons.length; i++) {
-            if (patrons[i][0].equals(patronName) && patrons[i][3]!=null) {
-                patronISBN = patrons[i][3];
+    public static void generateBookRecommendations(String tc) {
+        String bookISBN = null;
+        for (int i = 0; i < transactionsQuantity; i++) {
+            if (transactions[i][0].equals(tc) && transactions[i][1] != null) {
+                bookISBN = transactions[i][1];
                 break;
             }
         }
-        if (patronISBN == null) {
-            Random random=new Random();
-            int randomIndex=random.nextInt(bookQuantity);
+        if (bookISBN == null) {
+            Random random = new Random();
+            int randomIndex = random.nextInt(bookQuantity);
             String recomTitle = books[randomIndex][0];
             String recomAuthor = books[randomIndex][1];
             String recomPageCount = books[randomIndex][2];
             String recomISBN = books[randomIndex][3];
             System.out.printf("Size önerilen kitap: \nBaşlık: %s, Yazar: %s, Sayfa Sayısı: %s, ISBN: %s",
                     recomTitle, recomAuthor, recomPageCount, recomISBN);
-        }
-        else {
-            String bookAuthor=null;
-            for (int i=0; i<bookQuantity; i++){
-                if (books[i][3].equals(patronISBN)){
-                    bookAuthor=books[i][1];
+        } else {
+            String bookAuthor = null;
+            for (int i = 0; i < bookQuantity; i++) {
+                if (books[i][3].equals(bookISBN)) {
+                    bookAuthor = books[i][1];
+                    break;
                 }
             }
             System.out.println("Daha önce aldığınız kitaplara göre önerilen kitaplar : ");
@@ -163,3 +163,5 @@ public class LibraryManagementSystem {
     }
 
 }
+
+
