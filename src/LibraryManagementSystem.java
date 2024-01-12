@@ -33,6 +33,35 @@ public class LibraryManagementSystem {
 
         }
     }
+    static int userListİndex = -1;
+    private static String updatePatronInfo(String updateSearchPatronTC,String fullName,String updateTC,String eMail,String password) {
+
+        for (int i = 0; i < patrons.length; i++) {
+            String searchPatrons = patrons[i][1];
+            userListİndex = i;
+            if (searchPatrons.equalsIgnoreCase(updateSearchPatronTC)) {
+                System.out.println("Aranılan kişi bulundu.\n");
+                break;
+
+            }else {
+                System.out.println("Aranılan kişi bulunamadı.");
+            }
+        }
+        System.out.println("Arama tamamlandı.");
+        System.out.println("Patronun tam ismi: " + patrons[userListİndex][0]);
+        System.out.println("Patron T.C       : " + patrons[userListİndex][1]);
+        System.out.println("Patron E-posta   : " + patrons[userListİndex][2]);
+        System.out.println("Patron şifre     : " + patrons[userListİndex][3]+"\n");
+
+        patrons[userListİndex][0] = fullName.toLowerCase();
+        patrons[userListİndex][1] = updateTC;
+        patrons[userListİndex][2] = eMail.replaceAll(" ", "").toLowerCase();
+        patrons[userListİndex][3] = password;
+
+
+        return "güncellendi";
+    }
+
     public static void main(String[] args) {
         System.out.println("Merhaba");
     }
