@@ -124,6 +124,7 @@ public class LibraryManagementSystem {
         }
 
     }
+
     public static void hataliGiris (String id, String sifre){
         boolean girisBasarili = false;
         for (int i=0; i<patrons.length;i++) {
@@ -139,4 +140,25 @@ public class LibraryManagementSystem {
 
     }
 
+    public static void updateBook(String ISBN, String title, String author, String bookPage) {
+        boolean kitapBulundu = false;
+        for (int i = 0; i < bookQuantity; i++) {
+            if (books[i][3].equals(ISBN)) {
+                kitapBulundu = true;
+                books[i][0] = title;
+                books[i][1] = author;
+                books[i][2] = bookPage;
+                System.out.println("Kitap Bilgileri Güncellenmiştir.");
+                break;
+            }
+        }
+        if (!kitapBulundu) {
+            System.out.println("Güncellemek istediğiniz kitap bulunmamaktadır.");
+        }
+    }
+
+
 }
+
+
+
