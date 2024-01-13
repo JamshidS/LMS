@@ -35,6 +35,16 @@ public class LibraryManagementSystem {
         }
     }
 
+    public static String[][] extendBooksArrayOnAddition() {
+        String[][] newBooks = new String[books.length + 1][4];
+        for (int i = 0; i < books.length; i++) {
+            for (int j = 0; j < 4; j++) {
+                newBooks[i][j] = books[i][j];
+            }
+        }
+        return newBooks;
+    }
+
     public static void main(String[] args) {
         System.out.println("Merhaba");
     }
