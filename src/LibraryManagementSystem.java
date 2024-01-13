@@ -1,4 +1,5 @@
 import java.sql.SQLOutput;
+import java.util.Random;
 import java.util.Scanner;
 
 public class LibraryManagementSystem {
@@ -125,6 +126,45 @@ public class LibraryManagementSystem {
         }
 
     }
+
+    public static void generateBookRecommendations(String tc) {
+        String bookISBN = null;
+        for (int i = 0; i < transactionsQuantity; i++) {
+            if (transactions[i][0].equals(tc) && transactions[i][1] != null) {
+                bookISBN = transactions[i][1];
+                break;
+            }
+        }
+        if (bookISBN == null) {
+            Random random = new Random();
+            int randomIndex = random.nextInt(bookQuantity);
+            String recomTitle = books[randomIndex][0];
+            String recomAuthor = books[randomIndex][1];
+            String recomPageCount = books[randomIndex][2];
+            String recomISBN = books[randomIndex][3];
+            System.out.printf("Size önerilen kitap: \nBaşlık: %s, Yazar: %s, Sayfa Sayısı: %s, ISBN: %s",
+                    recomTitle, recomAuthor, recomPageCount, recomISBN);
+        } else {
+            String bookAuthor = null;
+            for (int i = 0; i < bookQuantity; i++) {
+                if (books[i][3].equals(bookISBN)) {
+                    bookAuthor = books[i][1];
+                    break;
+                }
+            }
+            System.out.println("Daha önce aldığınız kitaplara göre önerilen kitaplar : ");
+            for (int j = 0; j < bookQuantity; j++) {
+                if (books[j][1].equals(bookAuthor)) {
+                    System.out.println("Başlık: " + books[j][0] +
+                            ", Yazar: " + books[j][1] +
+                            ", Sayfa Sayısı: " + books[j][2] +
+                            ", ISBN: " + books[j][3]);
+                }
+            }
+        }
+    }
+
+
     public static void updateBook(String ISBN, String title, String author, String bookPage) {
         boolean kitapBulundu = false;
         for (int i = 0; i < bookQuantity; i++) {
@@ -146,6 +186,7 @@ public class LibraryManagementSystem {
         return bookQuantity;
 
     }
+
 
 }
 
