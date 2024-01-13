@@ -33,20 +33,14 @@ public class LibraryManagementSystem {
 
         }
     }
-    public static void extendBooksArrayOnAddition(String title,String author,String bookPage,String ISBN){
-        String[][] newBooks=new String[books.length+1][4];
-        for (int i=0; i<books.length; i++){
-            for (int j=0; j<4; j++){
-                newBooks[i][j]=books[i][j];
+    public static String[][] extendBooksArrayOnAddition() {
+        String[][] newBooks = new String[books.length + 1][4];
+        for (int i = 0; i < books.length; i++) {
+            for (int j = 0; j < 4; j++) {
+                newBooks[i][j] = books[i][j];
             }
         }
-        newBooks[bookQuantity][0]=title;
-        newBooks[bookQuantity][1]=author;
-        newBooks[bookQuantity][2]=bookPage;
-        newBooks[bookQuantity][3]=ISBN;
-
-        bookQuantity++;
-        books=newBooks;
+        return newBooks;
     }
     public static void main(String[] args) {
         System.out.println("Merhaba");
