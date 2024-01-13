@@ -136,7 +136,20 @@ public class LibraryManagementSystem {
         }
 
     }
+    public static void hataliGiris (String id, String sifre){
+        boolean girisBasarili = false;
+        for (int i=0; i<patrons.length;i++) {
+            if (id.equals(patrons[i][2]) && sifre.equals(patrons[i][3])) {
+                girisBasarili = true;
+                System.out.println("Giriş Başarılı");
+                break;
+            }
+        }
+        if (!girisBasarili){
+            System.out.println("Giriş Başarısız");
+        }
 
+    }
     public static void generateBookRecommendations(String tc) {
         String bookISBN = null;
         for (int i = 0; i < transactionsQuantity; i++) {
@@ -196,7 +209,6 @@ public class LibraryManagementSystem {
         return bookQuantity;
 
     }
-
-
 }
+
 
