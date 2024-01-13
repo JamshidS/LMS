@@ -1,4 +1,6 @@
 import java.sql.SQLOutput;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -7,7 +9,84 @@ public class LibraryManagementSystem {
     static String[][] books = new String[INDEX][4];
     static String[][] patrons = new String[INDEX][4];
     static String[][] transactions = new String[INDEX][3];
-    static int bookQuantity = 0;
+    static int bookQuantity=0;
+  
+    private static String userdeleteddd(String patronsTC) {
+        int bookIndex = -1;
+
+        for (int i = 0; i < patrons.length; i++) {
+            if (patrons[i][1].equalsIgnoreCase(patronsTC)) {
+                bookIndex = i;
+                break;
+            }
+        }
+        if (bookIndex != -1) {
+            String[][] newpatrons = new String[patrons.length - 1][2];
+            int newIndex = 0;
+            for (int i = 0; i < patrons.length; i++) {
+                if (bookIndex != i) {
+                    for (int k = 0; k < 2; k++) {
+                        if (patrons[i][k] != null) {
+                            newpatrons[newIndex] = patrons[i];
+                            ///
+                        }
+                    }
+                    newIndex++;
+                }
+            }
+            patrons = newpatrons;
+
+
+        }
+
+        return "Liste güncellendi kullanıcı silindi";
+
+    }
+  
+    private static String checkBookReturnDeadline(String bookISBN) {
+
+        for (int i = 0; i < patrons.length;i++) {
+            String kullaniciTC = patrons[i][1];
+            if (kullaniciTC != null) {
+                if (kullaniciTC.equalsIgnoreCase(bookISBN)) {
+                    System.out.println(bookISBN + " T.C numarasına sahip kişi bulundu.");
+
+                    LocalDate bugun = LocalDate.now();
+                    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+                    System.out.println("Kitabın ödünç alındığı tarih      : " + format.format(bugun).toUpperCase());
+                    LocalDate teslimTarihi = bugun.plusDays(10);
+                    System.out.println("Kitabın getirilmesi gereken tarih : " + format.format(teslimTarihi));
+
+                    Scanner scan = new Scanner(System.in);
+                    System.out.print("Kitabın geldiği tarih (gg.aa.yyyy biçimini girin): ");
+                    String kitapGelisTarihiStr = scan.next();
+                    LocalDate kitapGelisTarihi = LocalDate.parse(kitapGelisTarihiStr, format);
+
+                    if (kitapGelisTarihi.isAfter(teslimTarihi)) {
+                        System.out.println("Kitap beklenenden geç geldi!");
+                        System.out.println("Kullanıcının 1 ay süreyle kitap ödünç alması yasaktır.");
+
+                        break;
+                    } else {
+                        System.out.println("Kitap son teslim tarihinden önce teslim edildi.");
+                        System.out.println("Kullanıcı kitap ödünç alabilir.");
+                    }
+                } else {
+                    System.out.println("Bu T.C'ye ait kayıt bulunamadı.");
+                    break;
+                }
+            } else {
+                break;
+            }
+
+        }
+        return "Kullanıcı kitap ödünç alabilir. ";
+    }
+
+
+
+ 
 
     public static void addBook(String title, String author, String bookPage, String ISBN) {
         if (bookQuantity < books.length) {
@@ -30,8 +109,6 @@ public class LibraryManagementSystem {
 
             bookQuantity++;
             books = newBookList;
-
-
         }
     }
 
