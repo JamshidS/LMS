@@ -7,6 +7,7 @@ public class LibraryManagementSystem {
     static String[][] patrons = new String[INDEX][4];
     static String[][] transactions = new String[INDEX][3];
     static int bookQuantity=0;
+    static int newVaribale = 0;
     public static void addBook(String title,String author,String bookPage,String ISBN){
         if (bookQuantity<books.length){
             books[bookQuantity][0]=title;
