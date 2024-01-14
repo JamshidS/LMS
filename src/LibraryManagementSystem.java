@@ -149,6 +149,26 @@ public class LibraryManagementSystem {
             if (currentQuantity > 0) {
                 books[kitapIndex][2] = String.valueOf(currentQuantity - 1); 
                 System.out.println("İşlem başarıyla tamamlandı. Kitap iade edildi.");
+                 int transactionIndex = -1;
+                for (int i = 0; i < transactions.length; i++) {
+                    if (transactions[i] != null && transactions[i][0] != null && transactions[i][1] != null && transactions[i][2] != null) {
+                        if (transactions[i][0].equalsIgnoreCase(bookName) && transactions[i][1].equals(numarasi)) {
+                            transactionIndex = i;
+                            break;
+                        }
+                    }
+                }
+
+                if (transactionIndex != -1) {
+                    for (int i = transactionIndex; i < transactions.length - 1; i++) {
+                        transactions[i] = transactions[i + 1];
+                    }
+                    transactions[transactions.length - 1] = null;
+                    System.out.println("Kitap iade edildi ve ilgili işlem kaydı silindi.");
+                } else {
+                    System.out.println("Kitap iade edildi, ancak ilgili işlem kaydı bulunamadı.");
+                }
+
                 return "İşlem başarıyla tamamlandı. Kitap iade edildi.";
 
             } else {
@@ -159,5 +179,6 @@ public class LibraryManagementSystem {
         }
         scr.close();
         return "Kitap iade edilemedi. Belirtilen isim ve numarada kitap bulunamadı veya stokta yok.";
+    }
     }
 }
