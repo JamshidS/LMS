@@ -130,7 +130,7 @@ public class LibraryManagementSystem {
         String name = scr.nextLine();
 
         System.out.println("Kitabın ismini giriniz :");
-        String bookname = scr.nextLine();
+        String bookName = scr.nextLine();
 
         System.out.println("Kitabın  numarasını  giriniz :");
         int numarasi = scr.nextInt();
@@ -138,7 +138,7 @@ public class LibraryManagementSystem {
         int kitapIndex = -1;
         for (int i = 0; i < books.length; i++) {
             if (books[i] != null && books[i][0] != null && books[i][3] != null) {
-                if (books[i][0].equalsIgnoreCase(bookname) && books[i][3].equals(numarasi)) {
+                if (books[i][0].equalsIgnoreCase(bookName) && books[i][3].equals(numarasi)) {
                     kitapIndex = i;
                     break;
                 }
