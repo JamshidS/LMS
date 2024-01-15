@@ -84,6 +84,15 @@ public class LibraryManagementSystem {
         }
         return "Kullanıcı kitap ödünç alabilir. ";
     }
+    public static void genelBilgiler(){
+
+        System.out.println("1-Kitap kaydı ve kontrolü    :Sizden istenilen bilgiler : isim soyisim,kitabın ismi,T.C kimlik numarası ve kitap ISBN'dir.  :");
+        System.out.println("2-Kitap tarihi ve  kontrolü  :Sizden istenilen bilgiler: Kitap ISBN numarası. ");
+        System.out.println("3-Kullanıcı silinmesi        :Sizden istenilen bilgiler: Kullanıcının TC numarsını girmeniz gerekiyor.");
+        System.out.println("4-Kullanıcı güncelleme       :Sizden istenilen bilgiler :Kullanıcının TC numarasını girerek  kullanıcıyı bularak yeni isim ve soyisim güncellemesi yapılmaktadır.");
+        System.out.println("6-Çıkış .\n");
+
+    }
 
     public static void addBook(String title, String author, String bookPage, String ISBN) {
         if (bookQuantity < books.length) {
