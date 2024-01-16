@@ -129,9 +129,7 @@ public class LibraryManagementSystem {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Arama kriteri giriniz: ");
         String  searchCriteria= scanner.next();
-
         boolean toFind = false;
-
         for (int i = 0; i < bookQuantity; i++) {
             if (books[i][0].equalsIgnoreCase(searchCriteria) || books[i][1].equalsIgnoreCase(searchCriteria) || books[i][2].equalsIgnoreCase(searchCriteria)) {
                 System.out.println("Kitap Bulundu!");
@@ -142,10 +140,8 @@ public class LibraryManagementSystem {
                 break;
             }
         }
-
         if (!toFind) {
             System.out.println("Kitap bulunamadı.");
-
         }
     }
 }
