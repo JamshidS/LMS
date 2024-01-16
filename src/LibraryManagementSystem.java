@@ -12,6 +12,40 @@ public class LibraryManagementSystem {
     static int transactionQuantity = 0;
     static int patronQuantity = 0;
 
+    public static void kullanıcıGirişi() {
+        System.out.println("Kütüphanemize Hoş Geldiniz. ");
+        System.out.println("Yapmak istediğinizi seçeneklerden seçebilirsiniz.\n");
+        Scanner scan = new Scanner(System.in);
+        System.out.println("1-GİRİŞ" + "\n2-ÇIKIŞ");
+
+        System.out.print("Seçimi Giriniz :");
+        String selecttwo = scan.nextLine();
+        if (selecttwo.equalsIgnoreCase("1")) {
+            Scanner scanner = new Scanner(System.in);
+            boolean girişKontrol=false ;
+            while (true) {
+                System.out.print("Kullanıcı adı :");
+                String isim = scan.nextLine();
+                System.out.print("Şifre         :");
+                String şifre = scan.nextLine();
+                if (isim.equalsIgnoreCase("") && (şifre.equalsIgnoreCase(""))) {
+                    System.out.println("\nGiriş başarılı.");
+                    girişKontrol = true;
+                    break;
+                } else if (isim.equalsIgnoreCase("") && (!şifre.equalsIgnoreCase(""))) {
+                    System.out.println("Şifreniz yanlıştır.");
+                } else if (!isim.equalsIgnoreCase("") && (şifre.equalsIgnoreCase(""))) {
+                    System.out.println("Kullanıcı adınız yanlıştır.");
+                } else if (!isim.equalsIgnoreCase("")&&!şifre.equalsIgnoreCase("")) {
+                    System.out.println("Hatalı kullanıcı adı ve şifre.");
+                }
+            }
+        }else if (selecttwo.equalsIgnoreCase("2")){
+            System.out.println("\nÇıkış yapılıyor...");
+            System.exit(0);
+        }
+    }
+
     private static String userdeleteddd(String patronsTC) {
         int bookIndex = -1;
 
