@@ -153,7 +153,6 @@ public class LibraryManagementSystem {
 
     public static void main(String[] args) {
         System.out.println("Merhaba");
-        requestBook();
 
     }
 
@@ -391,15 +390,9 @@ public class LibraryManagementSystem {
         return bookQuantity;
 
     }
-    public static void requestBook(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Kitap Adını Giriniz: ");
-        String bookName = scanner.nextLine();
-        System.out.print("Kitap Yazarını Giriniz: ");
-        String authorName = scanner.nextLine();
+    public static void requestBook(String bookName, String authorName){
         int page = randomPage();
         int bookId =  randomBookId();
-
         System.out.println("Kitap talebiniz alındı.");
         System.out.println("Kitap Adı: " + bookName);
         System.out.println("Kitap Yazarı: " + authorName);
@@ -407,6 +400,7 @@ public class LibraryManagementSystem {
         System.out.println("Kitap Id: " + bookId);
     }
     public static int randomPage(){
+
         return (int) (Math.random() * 901) + 100;
     }
     public static int randomBookId(){
