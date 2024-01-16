@@ -314,6 +314,7 @@ public class LibraryManagementSystem {
             if (!toFind) {
                 System.out.println("Kitap bulunamadı.");
             }
+        }
     public static void bookview(String bookName) {
 
         boolean kitapBulundu = false;
