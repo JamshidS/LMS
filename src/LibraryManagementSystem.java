@@ -52,6 +52,11 @@ public class LibraryManagementSystem {
                 if (kullaniciTC.equalsIgnoreCase(bookISBN)) {
                     System.out.println(bookISBN + " T.C numarasına sahip kişi bulundu.");
 
+
+                    LocalDate bugun = LocalDate.now();
+                    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+
                     LocalDate bugun = LocalDate.now();
                     DateTimeFormatter format = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
@@ -251,6 +256,7 @@ public class LibraryManagementSystem {
             System.out.println("Giriş Başarısız");
         }
 
+
     }
     public static void generateBookRecommendations(String tc) {
         String bookISBN = null;
@@ -308,7 +314,145 @@ public class LibraryManagementSystem {
             if (!toFind) {
                 System.out.println("Kitap bulunamadı.");
             }
+    public static void bookview(String bookName) {
+
+        boolean kitapBulundu = false;
+        for (int i = 0; i < books.length; i++) {
+            if (bookName.equals(books[i][0])) {
+                kitapBulundu = true;
+                System.out.println("Kitap Adı: " + books[i][0]);
+                System.out.println("Yazarı: " + books[i][1]);
+                System.out.println("Sayfa Sayısı: " + books[i][2]);
+                break;
+            }
         }
+        if (!kitapBulundu) {
+            System.out.println("İstediğiniz kitap kütüphanemizde bulunmamaktadır.");
+        }
+
+    public static String checkOutBook(String fullName, String tc, String eMail, String password, String bookName, String bookISBN) {
+        if (patronQuantity < INDEX) {
+            patrons[patronQuantity][0] = fullName.replaceAll(" ", "").toLowerCase();
+            patrons[patronQuantity][1] = tc;
+            patrons[patronQuantity][2] = eMail.replaceAll(" ", "").toLowerCase();
+            patrons[patronQuantity][3] = password;
+            patronQuantity++;
+
+            //aranılan obje bulma
+
+            boolean bookkk = false;
+            for (String[] book : books) {
+                if (book[0].equalsIgnoreCase(bookName.trim())) {
+                    System.out.println(book[0] + "  adında bir kitap var. Yazar :" + book[1]);
+                    bookkk = true;
+
+                    if (patrons.length > transactionQuantity){
+                        transactions[transactionQuantity][0] = tc;
+                        transactions[transactionQuantity][1] = bookISBN;
+                        transactions[transactionQuantity][2] = LocalDate.now().toString();
+                        transactionQuantity++;
+                        System.out.println("Kitap alımı başarılı oldu.");
+
+                        int bookIndex = -1;
+                        for (int i = 0; i < books.length; i++) {
+                            if (books[i][0].equalsIgnoreCase(bookName)) {
+                                bookIndex = i;
+                                break;
+                            }
+                        }
+                        if (bookIndex != -1) {
+                            String[][] newBooks = new String[books.length - 1][2];
+                            int newIndex = 0;
+                            for (int i = 0; i < books.length; i++) {
+                                if (i != bookIndex) {
+                                    for (int k =0;k < books.length;k++){
+                                        newBooks[newIndex] = books[i];
+                                    }
+                                    newIndex++;
+                                }
+                                books = newBooks;
+                            }
+
+                            System.out.println("Liste güncellendi. ");
+
+                        } else {
+                            System.out.println("Kişi eklenemdi.");
+                        }
+                    } else {
+                        System.out.println("Dosya boyutu aşıldı.");
+                    }
+                }
+            }
+            if (!bookkk) {
+                System.out.println("Kütüphanemizde böyle bir kitap bulunmamaktadır. ");
+            }
+        } else {
+            String[][] newwpatrons = new String[INDEX + 1][4];
+            for (int i = 0; i < newwpatrons.length; i++) {
+                for (int j = 0; j < 4; j++) {
+                    newwpatrons[i][j] = patrons[i][j];
+                }
+            }
+            System.out.println("Name added :" + patrons[patronQuantity][0]);
+            newwpatrons[patronQuantity][0] = fullName;
+            newwpatrons[patronQuantity][1] = tc;
+            newwpatrons[patronQuantity][2] = eMail;
+            newwpatrons[patronQuantity][3] = password;
+
+            patrons=newwpatrons;
+        }
+        return "The book purchase was successful.";
+    }
+    public static void hataliGiris (String id, String sifre){
+        boolean girisBasarili = false;
+        for (int i=0; i<patrons.length;i++) {
+            if (id.equals(patrons[i][2]) && sifre.equals(patrons[i][3])) {
+                girisBasarili = true;
+                System.out.println("Giriş Başarılı");
+                break;
+            }
+        }
+        if (!girisBasarili){
+            System.out.println("Giriş Başarısız");
+        }
+
+    }
+    public static void generateBookRecommendations(String tc) {
+        String bookISBN = null;
+        for (int i = 0; i < transactionQuantity; i++) {
+            if (transactions[i][0].equals(tc) && transactions[i][1] != null) {
+                bookISBN = transactions[i][1];
+                break;
+            }
+        }
+        if (bookISBN == null) {
+            Random random = new Random();
+            int randomIndex = random.nextInt(bookQuantity);
+            String recomTitle = books[randomIndex][0];
+            String recomAuthor = books[randomIndex][1];
+            String recomPageCount = books[randomIndex][2];
+            String recomISBN = books[randomIndex][3];
+            System.out.printf("Size önerilen kitap: \nBaşlık: %s, Yazar: %s, Sayfa Sayısı: %s, ISBN: %s",
+                    recomTitle, recomAuthor, recomPageCount, recomISBN);
+        } else {
+            String bookAuthor = null;
+            for (int i = 0; i < bookQuantity; i++) {
+                if (books[i][3].equals(bookISBN)) {
+                    bookAuthor = books[i][1];
+                    break;
+                }
+            }
+            System.out.println("Daha önce aldığınız kitaplara göre önerilen kitaplar : ");
+            for (int j = 0; j < bookQuantity; j++) {
+                if (books[j][1].equals(bookAuthor)) {
+                    System.out.println("Başlık: " + books[j][0] +
+                            ", Yazar: " + books[j][1] +
+                            ", Sayfa Sayısı: " + books[j][2] +
+                            ", ISBN: " + books[j][3]);
+                }
+            }
+        }
+    }
 
     public static String checkOutBook(String fullName, String tc, String eMail, String password, String bookName, String bookISBN) {
         if (patronQuantity < INDEX) {
@@ -402,8 +546,9 @@ public class LibraryManagementSystem {
         }
     }
 
-    public static int countTotalBooks() {
 
+  
+    public static int countTotalBooks() {
         return bookQuantity;
     }
     
