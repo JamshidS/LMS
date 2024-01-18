@@ -11,76 +11,6 @@ public class LibraryManagementSystem {
     static int bookQuantity=0;
     static int transactionQuantity = 0;
     static int patronQuantity = 0;
-    public static void kullanıcıGirişi() {
-        System.out.println("\nEn iyi ödüllü kitap, yazar ve çok daha fazlası burada.\n" +
-                "Almaya hazır mısınız? Üye olmak ya da hesabınıza tekrar ulaşmak için tek yapmanız gereken kullanıcı adınız ve şifrenizi girmek.");
-        Scanner scan = new Scanner(System.in);
-
-        while (true) {
-            System.out.println("\nGiriş yapınız.");
-            System.out.println("1-Hesabınıza giriş." + "\n2-Hesap oluştur.\n3-Çıkış");
-            System.out.print("Seçimi Giriniz :");
-            int selecttwo = scan.nextInt();
-            scan.nextLine();
-            boolean isGirişKontrol = false;
-            switch (selecttwo) {
-                case 1:
-                    System.out.print("Kullanıcı e-mail :");
-                    String kullanıcıadı = scan.nextLine();
-                    System.out.print("Şifre         :");
-                    String şifre = scan.nextLine();
-                    for (int i = 0; i < patrons.length; i++) {
-                        if (kullanıcıadı.equalsIgnoreCase(patrons[i][2]) && şifre.equalsIgnoreCase(patrons[i][3])) {
-                            System.out.println("Giriş başarılı..");
-                            isGirişKontrol = true;
-                            break;
-                        }
-                    }
-                    if (!isGirişKontrol) {
-                        System.out.println("Hatalı giriş.Kayıtlı olan e-mail'inizi ve şifrenizi kontrol ediniz.");
-                        break;
-
-                    }
-
-                    break;
-
-                case 2:
-                    System.out.print("Kullanıcı adı    :");
-                    String yeniAd = scan.nextLine().trim();
-                    System.out.print("Kullanıcı soyadı :");
-                    String soy = scan.nextLine().toUpperCase().trim();
-                    System.out.print("T.C              :");
-                    String TC = scan.nextLine();
-                    System.out.print("E-mail           :");
-                    String email = scan.nextLine();
-                    System.out.print("Şifre            :");
-                    String sifre = scan.nextLine();
-                    System.out.println("Kayıt oluşturuldu .");
-
-                    patrons[patronQuantity][0] = yeniAd;
-                    patrons[patronQuantity][1] = TC;
-                    patrons[patronQuantity][2] = email;
-                    patrons[patronQuantity][3] = sifre;
-                    patronQuantity++;
-                    for (int i = 0; i < yeniAd.length(); i++) {
-                        yeniAd = yeniAd.substring(0, 1).toUpperCase() + yeniAd.substring(1).toLowerCase() + soy;
-                        break;
-                    }
-                    break;
-                case 3:
-                    System.exit(0);
-                    System.out.println("Çıkış yapılıyor...");
-                    break;
-            }
-            if (isGirişKontrol) {
-                break;
-            }
-
-        }
-    }
-
-
-
 
     public static void kullanıcıGirişi() {
         System.out.println("Kütüphanemize Hoş Geldiniz. ");
@@ -241,6 +171,28 @@ public class LibraryManagementSystem {
 
 
         return "güncellendi";
+    }
+
+    public static String[][] patronsUptade(){
+        String [][] newPatrons = new String[patrons.length+1][4];
+        for (int i =0;i<patrons.length;i++){
+            for (int j =0 ;j<patrons[i].length;j++){
+                newPatrons[i][j]=patrons[i][j];
+            }
+        }
+        patrons=newPatrons;
+        return patrons;
+    }
+
+    public static String[][] transacitionsUpdate(){
+        String[][] newTransactions=new String[transactions.length+1][3];
+        for (int i =0;i<transactions.length;i++){
+            for (int j =0;j<transactions[i].length;j++){
+                newTransactions[i][j]=transactions[i][j];
+            }
+        }
+        transactions=newTransactions;
+    return transactions;
     }
 
     public static String[][] extendBooksArrayOnAddition() {
