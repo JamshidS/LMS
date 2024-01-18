@@ -149,8 +149,7 @@ public class LibraryManagementSystem {
         return newBooks;
 
     }
-
-    public static void main(String[] args) {
+    public static void userMenu(String fullName,String tc,String password,String email){
         Scanner scanner = new Scanner(System.in);
         LibraryManagementSystem lms = new LibraryManagementSystem();
 
@@ -169,13 +168,13 @@ public class LibraryManagementSystem {
             System.out.println("12. Çıkış");
 
             System.out.print("Seçiminizi Girin: ");
-            int secim = scanner.nextInt();
+            String choice = scanner.nextLine();
 
-            switch (secim) {
-                case 1:
+            switch (choice) {
+                case "1":
                     lms.viewAvailableBooks();
                     break;
-                case 2:
+                case "2":
                     System.out.print("Kitap başlığını girin: ");
                     String title = scanner.next();
                     System.out.print("Yazarı girin: ");
@@ -186,47 +185,36 @@ public class LibraryManagementSystem {
                     String isbn = scanner.next();
                     lms.addBook(title, author, page, isbn);
                     break;
-                case 3:
+                case "3":
                     System.out.print("Silmek istediğiniz kitabın ISBN'sini girin: ");
                     String deleteISBN = scanner.next();
                     lms.deleteBook(deleteISBN);
                     break;
-                case 4:
+                case "4":
                     System.out.print("Görüntülemek istediğiniz kitabın adını girin: ");
                     String viewBookName = scanner.next();
                     lms.bookview(viewBookName);
                     break;
-                case 5:
-                    System.out.print("Adınızı girin: ");
-                    String fullName = scanner.next();
-                    System.out.print("Kitap ödünç almak için üye TC'sini girin: ");
-                    String tc = scanner.next();
-                    System.out.print("E-posta adresinizi girin: ");
-                    String email = scanner.next();
-                    System.out.print("Şifrenizi girin: ");
-                    String password = scanner.next();
+                case "5":
+
                     System.out.print("Kitap ismini girin: ");
                     String bookName = scanner.next();
                     System.out.print("Kitabın ISBN'sini girin: ");
                     String bookISBN = scanner.next();
                     lms.checkOutBook(fullName, tc, email, password, bookName, bookISBN);
                     break;
-                case 6:
+                case "6":
                     System.out.print("Ödünç alınan kitabın ISBN'sini girin: ");
                     String checkDeadlineISBN = scanner.next();
                     lms.checkBookReturnDeadline(checkDeadlineISBN);
                     break;
-                case 7:
+                case "7":
                     lms.generateReports();
                     break;
-                case 8:
-                    System.out.print("Üye TC'sini girin: ");
-                    String PatronTC = scanner.next();
-                    lms.generateBookRecommendations(PatronTC);
+                case "8":
+                    lms.generateBookRecommendations(tc);
                     break;
-                case 9:
-                    System.out.print("Güncellenecek üye TC'sini girin: ");
-                    String updatePatronTC = scanner.next();
+                case "9":
                     System.out.print("Yeni tam adı girin: ");
                     String fullNames = scanner.next();
                     System.out.print("Yeni TC girin      : ");
@@ -235,9 +223,9 @@ public class LibraryManagementSystem {
                     String updatedEmail = scanner.next();
                     System.out.print("Yeni şifre girin   : ");
                     String updatedPassword = scanner.next();
-                    lms.updatePatronInfo(updatePatronTC, fullNames, updatedTC, updatedEmail, updatedPassword);
+                    lms.updatePatronInfo(tc, fullNames, updatedTC, updatedEmail, updatedPassword);
                     break;
-                case 10:
+                case "10":
                     System.out.print("Güncellemek istediğiniz kitabın ISBN'sini girin: ");
                     String updateISBN = scanner.next();
                     System.out.print("Yeni kitap başlığını girin: ");
@@ -249,19 +237,23 @@ public class LibraryManagementSystem {
                     lms.updateBook(updateISBN, updateTitle, updateAuthor, updatePage);
                     System.out.println("Kitap bilgileri güncellendi.");
                     break;
-                case 11:
+                case "11":
                     System.out.print("Silmek istediğiniz kullanıcının TC'sini girin: ");
                     String deletePatronTC = scanner.next();
                     lms.userdeleteddd(deletePatronTC);
                     break;
-                case 12:
+                case "12":
                     System.out.println("Kütüphane Yönetim Sisteminden çıkılıyor. Hoşça kal!");
                     System.exit(0);
                     break;
                 default:
                     System.out.println("Geçersiz seçim. Lütfen geçerli bir seçenek girin.");
             }
-            }
+        }
+    }
+
+    public static void main(String[] args) {
+
         }
 
 
