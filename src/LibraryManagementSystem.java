@@ -11,7 +11,6 @@ public class LibraryManagementSystem {
     static int bookQuantity=0;
     static int transactionQuantity = 0;
     static int patronQuantity = 0;
-
     public static void kullanıcıGirişi() {
         System.out.println("\nEn iyi ödüllü kitap, yazar ve çok daha fazlası burada.\n" +
                 "Almaya hazır mısınız? Üye olmak ya da hesabınıza tekrar ulaşmak için tek yapmanız gereken kullanıcı adınız ve şifrenizi girmek.");
@@ -79,6 +78,8 @@ public class LibraryManagementSystem {
 
         }
     }
+
+
 
 
     private static String userdeleteddd(String patronsTC) {
