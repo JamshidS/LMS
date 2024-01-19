@@ -11,6 +11,26 @@ public class LibraryManagementSystem {
     static int bookQuantity=0;
     static int transactionQuantity = 0;
     static int patronQuantity = 0;
+    public static String[][] patronPlus() {
+        String[][] newBooks = new String[books.length + 1][4];
+        for (int i = 0; i < books.length; i++) {
+            for (int j = 0; j < 4; j++) {
+                newBooks[i][j] = books[i][j];
+            }
+        }
+        return newBooks;
+
+    }
+    public static String[][] transactionsPlus() {
+        String[][] newTransacions = new String[transactions.length + 1][4];
+        for (int i = 0; i < transactions.length; i++) {
+            for (int j = 0; j < 4; j++) {
+                newTransacions[i][j] = transactions[i][j];
+            }
+        }
+        return newTransacions;
+    }
+
 
     private static String userdeleteddd(String patronsTC) {
         int bookIndex = -1;
