@@ -228,6 +228,8 @@ public class LibraryManagementSystem {
         if (isBookAvailable) {
             LocalDate reservationDate = LocalDate.now();
             LocalDate dueDate = reservationDate.plusDays(reservationDays);
+            System.out.println("Kullanıcı ismi: "+fullName);
+            System.out.println("Kullanıcı TC: "+patronTC);
             System.out.println("Kitap rezerve edildi. Lütfen " + dueDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) +
                     " tarihine kadar alınız.");
         } else {
