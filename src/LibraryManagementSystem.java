@@ -12,6 +12,7 @@ public class LibraryManagementSystem {
     static int transactionQuantity = 0;
     static int patronQuantity = 0;
 
+
     private static String userdeleteddd(String patronsTC) {
         int bookIndex = -1;
 
@@ -152,6 +153,7 @@ public class LibraryManagementSystem {
 
     public static void main(String[] args) {
         System.out.println("Merhaba");
+
     }
 
 
@@ -400,6 +402,24 @@ public class LibraryManagementSystem {
         return bookQuantity;
 
     }
+
+    public static void requestBook(String bookName, String authorName){
+        int page = randomPage();
+        int bookId =  randomBookId();
+        System.out.println("Kitap talebiniz alındı.");
+        System.out.println("Kitap Adı: " + bookName);
+        System.out.println("Kitap Yazarı: " + authorName);
+        System.out.println("Kitap Sayfa Sayısı: " + page);
+        System.out.println("Kitap Id: " + bookId);
+    }
+  
+    public static int randomPage(){
+        return (int) (Math.random() * 901) + 100;
+    }
+    public static int randomBookId(){
+        return (books.length+1)*5+100;
+    }
+
     public static void  searchBooks() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Arama kriteri giriniz: ");
@@ -422,5 +442,6 @@ public class LibraryManagementSystem {
         }
     }
 }
+
 
 
