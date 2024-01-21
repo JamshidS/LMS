@@ -11,13 +11,18 @@ public class LibraryManagementSystem {
     static int bookQuantity=0;
     static int transactionQuantity = 0;
     static int patronQuantity = 0;
+<<<<<<< HEAD
     public static void giriş() {
+=======
+    public static void kullanıcıGirişi() {
+>>>>>>> 04d4f5820a2b2bdbd07391e4ea03ec6ae5237a7a
         System.out.println("\nEn iyi ödüllü kitap, yazar ve çok daha fazlası burada.\n" +
                 "Almaya hazır mısınız? Üye olmak ya da hesabınıza tekrar ulaşmak için tek yapmanız gereken kullanıcı adınız ve şifrenizi girmek.");
         Scanner scan = new Scanner(System.in);
 
         while (true) {
             System.out.println("\nGiriş yapınız.");
+<<<<<<< HEAD
             System.out.println("1-Hesap oluştur" + "\n2-Hesabınıza giriş.\n3-Çıkış");//
             System.out.print("Seçimi Giriniz :");
             int select = scan.nextInt();
@@ -47,10 +52,36 @@ public class LibraryManagementSystem {
                     patrons[patronQuantity][2] = email;
                     patrons[patronQuantity][3] = password;
                     patronQuantity++;
+=======
+            System.out.println("1-Hesabınıza giriş." + "\n2-Hesap oluştur.\n3-Çıkış");
+            System.out.print("Seçimi Giriniz :");
+            int selecttwo = scan.nextInt();
+            scan.nextLine();
+            boolean isGirişKontrol = false;
+            switch (selecttwo) {
+                case 1:
+                    System.out.print("Kullanıcı e-mail :");
+                    String kullanıcıadı = scan.nextLine();
+                    System.out.print("Şifre         :");
+                    String şifre = scan.nextLine();
+                    for (int i = 0; i < patrons.length; i++) {
+                        if (kullanıcıadı.equalsIgnoreCase(patrons[i][2]) && şifre.equalsIgnoreCase(patrons[i][3])) {
+                            System.out.println("Giriş başarılı..");
+                            isGirişKontrol = true;
+                            break;
+                        }
+                    }
+                    if (!isGirişKontrol) {
+                        System.out.println("Hatalı giriş.Kayıtlı olan e-mail'inizi ve şifrenizi kontrol ediniz.");
+                        break;
+
+                    }
+>>>>>>> 04d4f5820a2b2bdbd07391e4ea03ec6ae5237a7a
 
                     break;
 
                 case 2:
+<<<<<<< HEAD
                     System.out.print("Kullanıcı e-mail :");
                     String userEmail = scan.nextLine();
                     System.out.print("Şifre         :");
@@ -68,6 +99,27 @@ public class LibraryManagementSystem {
                     }
                     if (!isAuthenticated) {
                         System.out.println("Hatalı giriş.Kayıtlı olan e-mail'inizi ve şifrenizi kontrol ediniz.");
+=======
+                    System.out.print("Kullanıcı adı    :");
+                    String yeniAd = scan.nextLine().trim();
+                    System.out.print("Kullanıcı soyadı :");
+                    String soy = scan.nextLine().toUpperCase().trim();
+                    System.out.print("T.C              :");
+                    String TC = scan.nextLine();
+                    System.out.print("E-mail           :");
+                    String email = scan.nextLine();
+                    System.out.print("Şifre            :");
+                    String sifre = scan.nextLine();
+                    System.out.println("Kayıt oluşturuldu .");
+
+                    patrons[patronQuantity][0] = yeniAd;
+                    patrons[patronQuantity][1] = TC;
+                    patrons[patronQuantity][2] = email;
+                    patrons[patronQuantity][3] = sifre;
+                    patronQuantity++;
+                    for (int i = 0; i < yeniAd.length(); i++) {
+                        yeniAd = yeniAd.substring(0, 1).toUpperCase() + yeniAd.substring(1).toLowerCase() + soy;
+>>>>>>> 04d4f5820a2b2bdbd07391e4ea03ec6ae5237a7a
                         break;
                     }
                     break;
@@ -76,11 +128,16 @@ public class LibraryManagementSystem {
                     System.out.println("Çıkış yapılıyor...");
                     break;
             }
+<<<<<<< HEAD
             if (isAuthenticated) {
+=======
+            if (isGirişKontrol) {
+>>>>>>> 04d4f5820a2b2bdbd07391e4ea03ec6ae5237a7a
                 break;
             }
 
         }
+<<<<<<< HEAD
 
     }
     public static String[][] patronPlus() {
@@ -104,6 +161,46 @@ public class LibraryManagementSystem {
     }
 
 
+=======
+    }
+
+
+
+
+    public static void kullanıcıGirişi() {
+        System.out.println("Kütüphanemize Hoş Geldiniz. ");
+        System.out.println("Yapmak istediğinizi seçeneklerden seçebilirsiniz.\n");
+        Scanner scan = new Scanner(System.in);
+        System.out.println("1-GİRİŞ" + "\n2-ÇIKIŞ");
+
+        System.out.print("Seçimi Giriniz :");
+        String selecttwo = scan.nextLine();
+        if (selecttwo.equalsIgnoreCase("1")) {
+            Scanner scanner = new Scanner(System.in);
+            boolean girişKontrol=false ;
+            while (true) {
+                System.out.print("Kullanıcı adı :");
+                String isim = scan.nextLine();
+                System.out.print("Şifre         :");
+                String şifre = scan.nextLine();
+                if (isim.equalsIgnoreCase("") && (şifre.equalsIgnoreCase(""))) {
+                    System.out.println("\nGiriş başarılı.");
+                    girişKontrol = true;
+                    break;
+                } else if (isim.equalsIgnoreCase("") && (!şifre.equalsIgnoreCase(""))) {
+                    System.out.println("Şifreniz yanlıştır.");
+                } else if (!isim.equalsIgnoreCase("") && (şifre.equalsIgnoreCase(""))) {
+                    System.out.println("Kullanıcı adınız yanlıştır.");
+                } else if (!isim.equalsIgnoreCase("")&&!şifre.equalsIgnoreCase("")) {
+                    System.out.println("Hatalı kullanıcı adı ve şifre.");
+                }
+            }
+        }else if (selecttwo.equalsIgnoreCase("2")){
+            System.out.println("\nÇıkış yapılıyor...");
+            System.exit(0);
+        }
+    }
+>>>>>>> 04d4f5820a2b2bdbd07391e4ea03ec6ae5237a7a
 
     private static String userdeleteddd(String patronsTC) {
         int bookIndex = -1;
