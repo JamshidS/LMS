@@ -240,11 +240,136 @@ public class LibraryManagementSystem {
         return newBooks;
 
     }
+    public static void userMenu(String fullName,String tc,String password,String email) {
+        Scanner scanner = new Scanner(System.in);
+        LibraryManagementSystem lms = new LibraryManagementSystem();
+
+        while (true) {
+            System.out.println("1.  Mevcut Kitapları Görüntüle");
+            System.out.println("2.  Kitap Ekle");
+            System.out.println("3.  Kitap Sil");
+            System.out.println("4.  Kitap Ara");
+            System.out.println("5.  Kitap Görüntüle");
+            System.out.println("6.  Kitap Ödünç Al");
+            System.out.println("7.  Kitap Rezerve Et");
+            System.out.println("8.  Kitap İadesi Yap");
+            System.out.println("9.  Kitap İade Kontrol");
+            System.out.println("10. Raporları Görüntüle");
+            System.out.println("11. Kitap Tavsiyeleri Oluştur");
+            System.out.println("12. Üye Bilgilerini Güncelle");
+            System.out.println("13. Kitap Bilgisi Güncelle");
+            System.out.println("14. Kullanıcı Sil");
+            System.out.println("15. Çıkış");
+
+            System.out.print("Seçiminizi Girin: ");
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1":
+                    lms.viewAvailableBooks();
+                    break;
+                case "2":
+                    System.out.print("Kitap başlığını girin: ");
+                    String title = scanner.next();
+                    System.out.print("Yazarı girin: ");
+                    String author = scanner.next();
+                    System.out.print("Sayfa sayısını girin: ");
+                    String page = scanner.next();
+                    System.out.print("ISBN'yi girin: ");
+                    String isbn = scanner.next();
+                    lms.addBook(title, author, page, isbn);
+                    break;
+                case "3":
+                    System.out.print("Silmek istediğiniz kitabın ISBN'sini girin: ");
+                    String deleteISBN = scanner.next();
+                    lms.deleteBook(deleteISBN);
+                    break;
+                case "4":
+                    System.out.print("Görüntülemek istediğiniz kitabın adını girin: ");
+                    String viewBookName = scanner.next();
+                    lms.bookview(viewBookName);
+                    break;
+                case "5":
+                    System.out.print("Kitabın ISBN'sini girin: ");
+                    String searcBookISBN = scanner.next();
+                    lms.searchBooks(searcBookISBN);
+                    break;
+                case "6":
+                    System.out.print("Kitap ismini girin: ");
+                    String bookName = scanner.next();
+                    System.out.print("Kitabın ISBN'sini girin: ");
+                    String bookISBN = scanner.next();
+                    lms.checkOutBook(fullName, tc, email, password, bookName, bookISBN);
+                    break;
+                case "7":
+                    System.out.print("Kitabın ISBN'sini girin: ");
+                    String reserveBookISBN = scanner.next();
+                    System.out.println("Rezervasyon süresini girin: ");
+                    int reserveBookDay=scanner.nextInt();
+                    lms.reserveBook(fullName, tc,reserveBookISBN, reserveBookDay);
+                    break;
+                case "8":
+                    System.out.print("Kitabın ISBN'sini girin: ");
+                    String returnBookISBN = scanner.next();
+                    lms.bookReturn(tc,returnBookISBN);
+                    break;
+                case "9":
+                    System.out.print("Ödünç alınan kitabın ISBN'sini girin: ");
+                    String checkDeadlineISBN = scanner.next();
+                    lms.checkBookReturnDeadline(checkDeadlineISBN);
+                    break;
+                case "10":
+                    lms.generateReports();
+                    break;
+                case "11":
+                    lms.generateBookRecommendations(tc);
+                    break;
+                case "12":
+                    System.out.print("Yeni tam adı girin: ");
+                    String fullNames = scanner.next();
+                    System.out.print("Yeni TC girin      : ");
+                    String updatedTC = scanner.next();
+                    System.out.print("Yeni E-posta girin : ");
+                    String updatedEmail = scanner.next();
+                    System.out.print("Yeni şifre girin   : ");
+                    String updatedPassword = scanner.next();
+                    lms.updatePatronInfo(tc, fullNames, updatedTC, updatedEmail, updatedPassword);
+                    break;
+                case "13":
+                    System.out.print("Güncellemek istediğiniz kitabın ISBN'sini girin: ");
+                    String updateISBN = scanner.next();
+                    System.out.print("Yeni kitap başlığını girin: ");
+                    String updateTitle = scanner.next();
+                    System.out.print("Yeni yazar adını girin: ");
+                    String updateAuthor = scanner.next();
+                    System.out.print("Yeni sayfa sayısını girin: ");
+                    String updatePage = scanner.next();
+                    lms.updateBook(updateISBN, updateTitle, updateAuthor, updatePage);
+                    System.out.println("Kitap bilgileri güncellendi.");
+                    break;
+                case "14":
+                    System.out.print("Silmek istediğiniz kullanıcının TC'sini girin: ");
+                    String deletePatronTC = scanner.next();
+                    lms.userdeleteddd(deletePatronTC);
+                    break;
+                case "15":
+                    System.out.println("Kütüphane Yönetim Sisteminden çıkılıyor. Hoşça kal!");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Geçersiz seçim. Lütfen geçerli bir seçenek girin.");
+            }
+        }
+    }
 
     public static void main(String[] args) {
         System.out.println("Merhaba");
 
+
     }
+
+
+
 
 
     public static void viewAvailableBooks() {
@@ -408,7 +533,7 @@ public class LibraryManagementSystem {
 
             boolean bookkk = false;
             for (String[] book : books) {
-                if (book[0].equalsIgnoreCase(bookName.trim())) {
+                if (book[0] != null && book[0].equalsIgnoreCase(bookName.trim())) {
                     System.out.println(book[0] + "  adında bir kitap var. Yazar :" + book[1]);
                     bookkk = true;
 
@@ -528,10 +653,7 @@ public class LibraryManagementSystem {
         return (books.length+1)*5+100;
     }
 
-    public static void  searchBooks() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Arama kriteri giriniz: ");
-        String searchCriteria = scanner.next();
+    public static void  searchBooks(String searchCriteria) {
 
         boolean toFind = false;
 
@@ -550,3 +672,4 @@ public class LibraryManagementSystem {
         }
     }
 }
+
