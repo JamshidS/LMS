@@ -11,6 +11,27 @@ public class LibraryManagementSystem {
     static int bookQuantity=0;
     static int transactionQuantity = 0;
     static int patronQuantity = 0;
+    public static String[][] patronPlus() {
+        String[][] newBooks = new String[books.length + 1][4];
+        for (int i = 0; i < books.length; i++) {
+            for (int j = 0; j < 4; j++) {
+                newBooks[i][j] = books[i][j];
+            }
+        }
+        return newBooks;
+
+    }
+    public static String[][] transactionsPlus() {
+        String[][] newTransacions = new String[transactions.length + 1][4];
+        for (int i = 0; i < transactions.length; i++) {
+            for (int j = 0; j < 4; j++) {
+                newTransacions[i][j] = transactions[i][j];
+            }
+        }
+        return newTransacions;
+    }
+
+
 
     private static String userdeleteddd(String patronsTC) {
         int bookIndex = -1;
@@ -152,6 +173,7 @@ public class LibraryManagementSystem {
 
     public static void main(String[] args) {
         System.out.println("Merhaba");
+
     }
 
 
@@ -223,6 +245,18 @@ public class LibraryManagementSystem {
         return false;
     }
 
+    public static void reserveBook(String fullName,String patronTC, String bookISBN, int reservationDays){
+        boolean isBookAvailable = bookAvaible(bookISBN);
+        if (isBookAvailable) {
+            LocalDate reservationDate = LocalDate.now();
+            LocalDate dueDate = reservationDate.plusDays(reservationDays);
+            System.out.println("Kullanıcı ismi: "+fullName);
+            System.out.println("Kullanıcı TC: "+patronTC);
+            System.out.println("Kitap rezerve edildi. Lütfen " + dueDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) +
+                    " tarihine kadar alınız.");
+        } else {
+            System.out.println("Belirtilen ISBN'ye sahip kitap bulunamadı.");
+        }    }
 
     public static void bookview(String bookName) {
 
@@ -388,6 +422,7 @@ public class LibraryManagementSystem {
         return bookQuantity;
 
     }
+
     public static void bookReturn(String tcNo, String bookISBN) {
                 int transactionIndex = -1;
                 for (int i = 0; i < transactions.length; i++) {
@@ -405,5 +440,46 @@ public class LibraryManagementSystem {
                 } else {
                     System.out.println("Kitap iade edilemedi, ilgili işlem kaydı bulunamadı.");
                 }
+    }
+}
+
+
+    public static void requestBook(String bookName, String authorName){
+        int page = randomPage();
+        int bookId =  randomBookId();
+        System.out.println("Kitap talebiniz alındı.");
+        System.out.println("Kitap Adı: " + bookName);
+        System.out.println("Kitap Yazarı: " + authorName);
+        System.out.println("Kitap Sayfa Sayısı: " + page);
+        System.out.println("Kitap Id: " + bookId);
+    }
+  
+    public static int randomPage(){
+        return (int) (Math.random() * 901) + 100;
+    }
+    public static int randomBookId(){
+        return (books.length+1)*5+100;
+    }
+
+    public static void  searchBooks() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Arama kriteri giriniz: ");
+        String searchCriteria = scanner.next();
+
+        boolean toFind = false;
+
+        for (int i = 0; i < bookQuantity; i++) {
+            if (books[i][0].equalsIgnoreCase(searchCriteria) || books[i][1].equalsIgnoreCase(searchCriteria) || books[i][2].equalsIgnoreCase(searchCriteria)) {
+                System.out.println("Kitap Bulundu!");
+                System.out.println("Başlık: " + books[i][0]);
+                System.out.println("Yazar: " + books[i][1]);
+                System.out.println("ISBN: " + books[i][2]);
+                toFind = true;
+                break;
+            }
+        }
+        if (!toFind) {
+            System.out.println("Kitap bulunamadı.");
+        }
     }
 }
