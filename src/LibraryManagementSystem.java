@@ -239,7 +239,9 @@ public class LibraryManagementSystem {
                     lms.reserveBook(fullName, tc,reserveBookISBN, reserveBookDay);
                     break;
                 case "8":
-                    lms.bookReturn();
+                    System.out.print("Kitabın ISBN'sini girin: ");
+                    String returnBookISBN = scanner.next();
+                    lms.bookReturn(returnBookISBN);
                     break;
                 case "9":
                     System.out.print("Ödünç alınan kitabın ISBN'sini girin: ");
