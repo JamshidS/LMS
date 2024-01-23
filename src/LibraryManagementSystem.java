@@ -441,9 +441,6 @@ public class LibraryManagementSystem {
                     System.out.println("Kitap iade edilemedi, ilgili işlem kaydı bulunamadı.");
                 }
     }
-}
-
-
     public static void requestBook(String bookName, String authorName){
         int page = randomPage();
         int bookId =  randomBookId();
