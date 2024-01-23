@@ -11,6 +11,78 @@ public class LibraryManagementSystem {
     static int bookQuantity=0;
     static int transactionQuantity = 0;
     static int patronQuantity = 0;
+    public static void login() {
+        System.out.println("""
+                En iyi ödüllü kitap, yazar ve çok daha fazlası burada.
+                Almaya hazır mısınız? Üye olmak ya da hesabınıza tekrar ulaşmak için tek yapmanız gereken kullanıcı adınız ve şifrenizi girmek.""");
+        Scanner scan = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("\nGiriş yapınız.");
+            System.out.println("""
+                    1-Hesap oluştur
+                    2-Hesabınıza giriş.
+                    3-Çıkış""");//
+            System.out.print("Seçimi Giriniz :");
+            int select = scan.nextInt();
+            scan.nextLine();
+            boolean isAuthenticated = false;
+            String fullName = "";
+            String identityNumber = "";
+            String email = "";
+            String password = "";
+
+            switch (select) {
+                case 1:
+                    System.out.print("Kullanıcı adı    :");
+                    fullName = scan.nextLine();
+                    System.out.print("T.C              :");
+                    identityNumber = scan.nextLine();
+                    System.out.print("E-mail           :");
+                    email = scan.nextLine();
+                    System.out.print("Şifre            :");
+                    password = scan.nextLine();
+
+                    patrons[patronQuantity][0] =fullName;
+                    patrons[patronQuantity][1] = identityNumber;
+                    patrons[patronQuantity][2] = email;
+                    patrons[patronQuantity][3] = password;
+                    patronQuantity++;
+
+                    break;
+
+                case 2:
+                    System.out.print("Kullanıcı e-mail :");
+                    String userEmail = scan.nextLine();
+                    System.out.print("Şifre         :");
+                    String userPassword = scan.nextLine();
+                    for (String[] patron : patrons) {
+                        if (userEmail.equalsIgnoreCase(patron[2]) && userPassword.equalsIgnoreCase(patron[3])) {
+                            System.out.println("Giriş başarılı..");
+                            fullName = patron[0];
+                            identityNumber = patron[1];
+                            isAuthenticated = true;
+                            break;
+
+                        }
+                    }
+                    if (!isAuthenticated) {
+                        System.out.println("Hatalı giriş.Kayıtlı olan e-mail'inizi ve şifrenizi kontrol ediniz.");
+                        break;
+                    }
+                    break;
+                case 3:
+                    System.exit(0);
+                    System.out.println("Çıkış yapılıyor...");
+                    break;
+            }
+            if (isAuthenticated) {
+                userMenu(fullName,identityNumber,password,email);
+            }
+
+        }
+
+    }
     public static String[][] patronPlus() {
         String[][] newBooks = new String[books.length + 1][4];
         for (int i = 0; i < books.length; i++) {
@@ -33,7 +105,7 @@ public class LibraryManagementSystem {
 
 
 
-    private static String userdeleteddd(String patronsTC) {
+    private static String deleteUser(String patronsTC) {
         int bookIndex = -1;
 
         for (int i = 0; i < patrons.length; i++) {
@@ -229,7 +301,7 @@ public class LibraryManagementSystem {
                     String bookName = scanner.next();
                     System.out.print("Kitabın ISBN'sini girin: ");
                     String bookISBN = scanner.next();
-                    lms.checkOutBook(fullName, tc, email, password, bookName, bookISBN);
+                    lms.checkOutBook(tc, bookName, bookISBN);
                     break;
                 case "7":
                     System.out.print("Kitabın ISBN'sini girin: ");
@@ -280,7 +352,7 @@ public class LibraryManagementSystem {
                 case "14":
                     System.out.print("Silmek istediğiniz kullanıcının TC'sini girin: ");
                     String deletePatronTC = scanner.next();
-                    lms.userdeleteddd(deletePatronTC);
+                    lms.deleteUser(deletePatronTC);
                     break;
                 case "15":
                     System.out.println("Kütüphane Yönetim Sisteminden çıkılıyor. Hoşça kal!");
@@ -451,14 +523,7 @@ public class LibraryManagementSystem {
         }
     }
 
-    public static String checkOutBook(String fullName, String tc, String eMail, String password, String bookName, String bookISBN) {
-        if (patronQuantity < INDEX) {
-            patrons[patronQuantity][0] = fullName.replaceAll(" ", "").toLowerCase();
-            patrons[patronQuantity][1] = tc;
-            patrons[patronQuantity][2] = eMail.replaceAll(" ", "").toLowerCase();
-            patrons[patronQuantity][3] = password;
-            patronQuantity++;
-
+    public static String checkOutBook(String tc, String bookName, String bookISBN) {
             //aranılan obje bulma
 
             boolean bookkk = false;
@@ -507,21 +572,6 @@ public class LibraryManagementSystem {
             if (!bookkk) {
                 System.out.println("Kütüphanemizde böyle bir kitap bulunmamaktadır. ");
             }
-        } else {
-            String[][] newwpatrons = new String[INDEX + 1][4];
-            for (int i = 0; i < newwpatrons.length; i++) {
-                for (int j = 0; j < 4; j++) {
-                    newwpatrons[i][j] = patrons[i][j];
-                }
-            }
-            System.out.println("Name added :" + patrons[patronQuantity][0]);
-            newwpatrons[patronQuantity][0] = fullName;
-            newwpatrons[patronQuantity][1] = tc;
-            newwpatrons[patronQuantity][2] = eMail;
-            newwpatrons[patronQuantity][3] = password;
-
-            patrons=newwpatrons;
-        }
         return "The book purchase was successful.";
     }
 
