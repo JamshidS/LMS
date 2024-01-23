@@ -11,6 +11,76 @@ public class LibraryManagementSystem {
     static int bookQuantity=0;
     static int transactionQuantity = 0;
     static int patronQuantity = 0;
+    public static void login() {
+        System.out.println("\nEn iyi ödüllü kitap, yazar ve çok daha fazlası burada.\n" +
+                "Almaya hazır mısınız? Üye olmak ya da hesabınıza tekrar ulaşmak için tek yapmanız gereken kullanıcı adınız ve şifrenizi girmek.");
+        Scanner scan = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("\nGiriş yapınız.");
+            System.out.println("1-Hesap oluştur" + "\n2-Hesabınıza giriş.\n3-Çıkış");//
+            System.out.print("Seçimi Giriniz :");
+            int select = scan.nextInt();
+            scan.nextLine();
+            boolean isAuthenticated = false;
+            String fullName = "";
+            String identityNumber = "";
+            String email = "";
+            String password = "";
+
+            switch (select) {
+                case 1:
+                    System.out.print("Kullanıcı adı    :");
+                    fullName = scan.nextLine();
+                    System.out.print("T.C              :");
+                    identityNumber = scan.nextLine();
+                    System.out.print("E-mail           :");
+                    email = scan.nextLine();
+                    System.out.print("Şifre            :");
+                    password = scan.nextLine();
+
+                    patrons[patronQuantity][0] =fullName;
+                    patrons[patronQuantity][1] = identityNumber;
+                    patrons[patronQuantity][2] = email;
+                    patrons[patronQuantity][3] = password;
+                    patronQuantity++;
+
+                    break;
+
+                case 2:
+                    System.out.print("Kullanıcı e-mail :");
+                    String userEmail = scan.nextLine();
+                    System.out.print("Şifre         :");
+                    String userPassword = scan.nextLine();
+                    for (int i = 0; i < patrons.length; i++) {
+                        if (userEmail.equalsIgnoreCase(patrons[i][2]) && userPassword.equalsIgnoreCase(patrons[i][3])) {
+                            System.out.println("Giriş başarılı..");
+                            fullName=patrons[i][0];
+                            identityNumber=patrons[i][1];
+                            isAuthenticated = true;
+                            break;
+
+                        }
+                    }
+                    if (!isAuthenticated) {
+                        System.out.println("Hatalı giriş.Kayıtlı olan e-mail'inizi ve şifrenizi kontrol ediniz.");
+                        break;
+                    }
+                    break;
+                case 3:
+                    System.exit(0);
+                    System.out.println("Çıkış yapılıyor...");
+                    break;
+            }
+            if (isAuthenticated) {
+                //kullanıcımenüsü..
+
+
+            }
+
+        }
+
+    }
     public static String[][] patronPlus() {
         String[][] newBooks = new String[books.length + 1][4];
         for (int i = 0; i < books.length; i++) {
