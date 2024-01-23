@@ -241,7 +241,7 @@ public class LibraryManagementSystem {
                 case "8":
                     System.out.print("Kitabın ISBN'sini girin: ");
                     String returnBookISBN = scanner.next();
-                    lms.bookReturn(returnBookISBN);
+                    lms.bookReturn(tc,returnBookISBN);
                     break;
                 case "9":
                     System.out.print("Ödünç alınan kitabın ISBN'sini girin: ");
@@ -583,10 +583,7 @@ public class LibraryManagementSystem {
         return (books.length+1)*5+100;
     }
 
-    public static void  searchBooks() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Arama kriteri giriniz: ");
-        String searchCriteria = scanner.next();
+    public static void  searchBooks(String searchCriteria) {
 
         boolean toFind = false;
 
