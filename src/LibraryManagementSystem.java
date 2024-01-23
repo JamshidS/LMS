@@ -423,6 +423,27 @@ public class LibraryManagementSystem {
 
     }
 
+    public static void bookReturn(String tcNo, String bookISBN) {
+                int transactionIndex = -1;
+                for (int i = 0; i < transactions.length; i++) {
+                        if (transactions[i][0].equalsIgnoreCase(tcNo) && transactions[i][1].equals(bookISBN)) {
+                            transactionIndex = i;
+                            break;
+                        }
+                    }
+                if (transactionIndex != -1) {
+                    for (int i = transactionIndex; i < transactions.length - 1; i++) {
+                        transactions[i] = transactions[i + 1];
+                    }
+                    transactions[transactions.length - 1] = null;
+                    System.out.println("Kitap iade edildi ve ilgili işlem kaydı silindi.");
+                } else {
+                    System.out.println("Kitap iade edilemedi, ilgili işlem kaydı bulunamadı.");
+                }
+    }
+}
+
+
     public static void requestBook(String bookName, String authorName){
         int page = randomPage();
         int bookId =  randomBookId();
@@ -462,6 +483,3 @@ public class LibraryManagementSystem {
         }
     }
 }
-
-
-
