@@ -12,13 +12,17 @@ public class LibraryManagementSystem {
     static int transactionQuantity = 0;
     static int patronQuantity = 0;
     public static void login() {
-        System.out.println("\nEn iyi ödüllü kitap, yazar ve çok daha fazlası burada.\n" +
-                "Almaya hazır mısınız? Üye olmak ya da hesabınıza tekrar ulaşmak için tek yapmanız gereken kullanıcı adınız ve şifrenizi girmek.");
+        System.out.println("""
+                En iyi ödüllü kitap, yazar ve çok daha fazlası burada.
+                Almaya hazır mısınız? Üye olmak ya da hesabınıza tekrar ulaşmak için tek yapmanız gereken kullanıcı adınız ve şifrenizi girmek.""");
         Scanner scan = new Scanner(System.in);
 
         while (true) {
             System.out.println("\nGiriş yapınız.");
-            System.out.println("1-Hesap oluştur" + "\n2-Hesabınıza giriş.\n3-Çıkış");//
+            System.out.println("""
+                    1-Hesap oluştur
+                    2-Hesabınıza giriş.
+                    3-Çıkış""");//
             System.out.print("Seçimi Giriniz :");
             int select = scan.nextInt();
             scan.nextLine();
@@ -52,11 +56,11 @@ public class LibraryManagementSystem {
                     String userEmail = scan.nextLine();
                     System.out.print("Şifre         :");
                     String userPassword = scan.nextLine();
-                    for (int i = 0; i < patrons.length; i++) {
-                        if (userEmail.equalsIgnoreCase(patrons[i][2]) && userPassword.equalsIgnoreCase(patrons[i][3])) {
+                    for (String[] patron : patrons) {
+                        if (userEmail.equalsIgnoreCase(patron[2]) && userPassword.equalsIgnoreCase(patron[3])) {
                             System.out.println("Giriş başarılı..");
-                            fullName=patrons[i][0];
-                            identityNumber=patrons[i][1];
+                            fullName = patron[0];
+                            identityNumber = patron[1];
                             isAuthenticated = true;
                             break;
 
@@ -73,9 +77,7 @@ public class LibraryManagementSystem {
                     break;
             }
             if (isAuthenticated) {
-                //kullanıcımenüsü..
-
-
+                userMenu(fullName,identityNumber,password,email);
             }
 
         }
