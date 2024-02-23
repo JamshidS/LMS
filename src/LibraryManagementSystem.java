@@ -418,21 +418,21 @@ public class LibraryManagementSystem {
 
 
     public static void deleteBook(String ISBN) {
-        int isfindIndex = -1;
+        int isfindIndexx = -1;
         if (bookQuantity == 0) {
             System.out.println("Kütühanede kitap sayısı 0'dır.");
         }
         for (int i = 0; i < bookQuantity; i++) {
             if (books[i][3].equals(ISBN)) {
-                isfindIndex = i;
+                isfindIndexx = i;
                 break;
             }
         }
-        if (isfindIndex != -1) {
+        if (isfindIndexx != -1) {
             String[][] newDeleteBook = new String [books.length-1][4];
             int Index=-1;
             for (int i = 0; i < books.length; i++) {
-                if (isfindIndex!=i){
+                if (isfindIndexx!=i){
                     for (int j = 0;j<books[j].length;j++){
                         if (books[i]!=null){
                             newDeleteBook[Index]=books[i];
