@@ -402,17 +402,17 @@ public class LibraryManagementSystem {
 
 
     public static void generateReports() {
-        int totalBooks = 0;
+        int totalBookss = 0;
         if (bookQuantity == 0) {
             System.out.println("Kütühanede kitap sayısı 0'dır.");
         } else {
             System.out.printf("%-20s %-20s %-20s %-20s%n", "Kitap İsmi", "Yazar İsmi", "Kitap Sayfası", "ISBN");
             for (int i = 0; i < bookQuantity; i++) {
                 System.out.printf("%-20s %-20s %-20s %-20s%n", books[i][0], books[i][1], books[i][2], books[i][3]);
-                totalBooks++;
+                totalBookss++;
             }
             System.out.println();
-            System.out.println("Toplam kitap sayısı : " + totalBooks);
+            System.out.println("Toplam kitap sayısı : " + totalBookss);
         }
     }
 
