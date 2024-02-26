@@ -429,21 +429,18 @@ public class LibraryManagementSystem {
             }
         }
         if (isfindIndexx != -1) {
-            String[][] newDeleteBook = new String [books.length-1][4];
-            int Index=-1;
+            String[][] newDeleteBook = new String[books.length][4];
+            int index = 0;
             for (int i = 0; i < books.length; i++) {
-                if (isfindIndexx!=i){
-                    for (int j = 0;j<books[j].length;j++){
-                        if (books[i]!=null){
-                            newDeleteBook[Index]=books[i];
-                        }
+                if (isfindIndexx != i) {
+                    for (int j = 0; j < books[i].length; j++) {
+                        newDeleteBook[index] = books[i];
                     }
-                    Index++;
+                    index++;
                 }
-
             }
-            books=newDeleteBook;
-            System.out.println("Kitap Listesi Güncellendi. ");
+            books = newDeleteBook;
+            System.out.println("Kitap Silindi Liste Güncellendi..");
         }
     }
 
