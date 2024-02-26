@@ -1,3 +1,5 @@
+package src;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
@@ -440,7 +442,7 @@ public class LibraryManagementSystem {
                 }
             }
             books = newDeleteBook;
-            System.out.println("Kitap Silindi Liste Güncellendi..");
+            System.out.println("Kitap Silindi Liste Güncellendi...");
         }
     }
 
