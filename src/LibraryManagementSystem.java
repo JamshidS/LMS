@@ -430,7 +430,7 @@ public class LibraryManagementSystem {
         }
         if (isfindIndexx != -1) {
             String[][] newDeleteBook = new String[books.length][4];
-            int index = 0;
+            int index = -0;
             for (int i = 0; i < books.length; i++) {
                 if (isfindIndexx != i) {
                     for (int j = 0; j < books[i].length; j++) {
