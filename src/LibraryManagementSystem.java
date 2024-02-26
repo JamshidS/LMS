@@ -109,7 +109,6 @@ public class LibraryManagementSystem {
         return transactions;
     }
 
-
     private static String deleteUser(String patronsTC) {
         int bookIndex = -1;
 
@@ -143,7 +142,7 @@ public class LibraryManagementSystem {
 
     }
 
-    private static String checkBookReturnDeadline(String customerTc) {
+   private static String checkBookReturnDeadline(String bookISBN) {
 
         for (int i = 0; i < patrons.length; i++) {
             String kullaniciTC = patrons[i][1];
@@ -208,6 +207,11 @@ public class LibraryManagementSystem {
     }
 
     private static String updatePatronInfo(String updateSearchPatronTC, String fullName, String updateTC, String eMail, String password) {
+
+
+
+        int userListİndex = -1;
+
 
         int userListİndex = -1;
         for (int i = 0; i < patrons.length; i++) {
@@ -378,6 +382,7 @@ public class LibraryManagementSystem {
     public static void viewAvailableBooks() {
         boolean kitapVar = false;
         for (int i = 0; i < books.length; i++) {
+
             boolean nulll=true;
             for (int j = 0; j < books[i].length; j++) {
                 if (books[i][j] != null) {
@@ -386,6 +391,16 @@ public class LibraryManagementSystem {
                 }
             }
             if (!nulll) {
+
+            boolean nulll=false;
+            for (int j = 0; j < books[i].length; j++) {
+                if (books[i][j] != null) {
+                    nulll = true;
+                    break;
+                }
+            }
+            if (nulll) {
+
                 kitapVar = true;
                 System.out.println("\nKitabın ismi          : " + books[i][0]);
                 System.out.println("Kitabın yazarı        : " + books[i][1]);
