@@ -1,3 +1,5 @@
+package src;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
@@ -14,7 +16,7 @@ public class LibraryManagementSystem {
 
     public static void login() {
         System.out.println("""
-                En iyi ödüllü kitap, yazar ve çok daha fazlası burada.
+                \nEn iyi ödüllü kitap, yazar ve çok daha fazlası burada.
                 Almaya hazır mısınız? Üye olmak ya da hesabınıza tekrar ulaşmak için tek yapmanız gereken kullanıcı adınız ve şifrenizi girmek.""");
         Scanner scan = new Scanner(System.in);
 
@@ -91,8 +93,9 @@ public class LibraryManagementSystem {
             for (int j = 0; j < 4; j++) {
                 newBooks[i][j] = books[i][j];
             }
+            books=newBooks;
         }
-        return newBooks;
+        return books;
 
     }
 
@@ -102,8 +105,10 @@ public class LibraryManagementSystem {
             for (int j = 0; j < 4; j++) {
                 newTransacions[i][j] = transactions[i][j];
             }
+        transactions=newTransacions;
         }
-        return newTransacions;
+
+        return transactions;
     }
 
 
@@ -117,11 +122,11 @@ public class LibraryManagementSystem {
             }
         }
         if (bookIndex != -1) {
-            String[][] newpatrons = new String[patrons.length - 1][2];
+            String[][] newpatrons = new String[patrons.length - 1][4];
             int newIndex = 0;
             for (int i = 0; i < patrons.length; i++) {
                 if (bookIndex != i) {
-                    for (int k = 0; k < 2; k++) {
+                    for (int k = 0; k < 4; k++) {
                         if (patrons[i][k] != null) {
                             newpatrons[newIndex] = patrons[i];
                             ///
@@ -129,6 +134,7 @@ public class LibraryManagementSystem {
                     }
                     newIndex++;
                 }
+
             }
             patrons = newpatrons;
 
@@ -139,13 +145,13 @@ public class LibraryManagementSystem {
 
     }
 
-    private static String checkBookReturnDeadline(String bookISBN) {
+    private static String checkBookReturnDeadline(String customerTc) {
 
         for (int i = 0; i < patrons.length; i++) {
             String kullaniciTC = patrons[i][1];
             if (kullaniciTC != null) {
-                if (kullaniciTC.equalsIgnoreCase(bookISBN)) {
-                    System.out.println(bookISBN + " T.C numarasına sahip kişi bulundu.");
+                if (kullaniciTC.equalsIgnoreCase(customerTc)) {
+                    System.out.println(customerTc + " T.C numarasına sahip kişi bulundu.");
 
                     LocalDate bugun = LocalDate.now();
                     DateTimeFormatter format = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -206,7 +212,6 @@ public class LibraryManagementSystem {
     private static String updatePatronInfo(String updateSearchPatronTC, String fullName, String updateTC, String eMail, String password) {
 
         int userListİndex = -1;
-
         for (int i = 0; i < patrons.length; i++) {
             String searchPatrons = patrons[i][1];
             userListİndex = i;
@@ -239,6 +244,7 @@ public class LibraryManagementSystem {
             for (int j = 0; j < 4; j++) {
                 newBooks[i][j] = books[i][j];
             }
+            books=newBooks;
         }
         return newBooks;
 
@@ -374,14 +380,14 @@ public class LibraryManagementSystem {
     public static void viewAvailableBooks() {
         boolean kitapVar = false;
         for (int i = 0; i < books.length; i++) {
-            boolean nulll=false;
+            boolean nulll=true;
             for (int j = 0; j < books[i].length; j++) {
                 if (books[i][j] != null) {
-                    nulll = true;
+                    nulll = false;
                     break;
                 }
             }
-            if (nulll) {
+            if (!nulll) {
                 kitapVar = true;
                 System.out.println("\nKitabın ismi          : " + books[i][0]);
                 System.out.println("Kitabın yazarı        : " + books[i][1]);
@@ -398,48 +404,45 @@ public class LibraryManagementSystem {
 
 
     public static void generateReports() {
-        int totalBooks = 0;
+        int totalBookss = 0;
         if (bookQuantity == 0) {
             System.out.println("Kütühanede kitap sayısı 0'dır.");
         } else {
             System.out.printf("%-20s %-20s %-20s %-20s%n", "Kitap İsmi", "Yazar İsmi", "Kitap Sayfası", "ISBN");
             for (int i = 0; i < bookQuantity; i++) {
                 System.out.printf("%-20s %-20s %-20s %-20s%n", books[i][0], books[i][1], books[i][2], books[i][3]);
-                totalBooks++;
+                totalBookss++;
             }
             System.out.println();
-            System.out.println("Toplam kitap sayısı : " + totalBooks);
+            System.out.println("Toplam kitap sayısı : " + totalBookss);
         }
     }
 
 
     public static void deleteBook(String ISBN) {
-        int findIndex = -1;
+        int isfindIndexx = -1;
         if (bookQuantity == 0) {
             System.out.println("Kütühanede kitap sayısı 0'dır.");
         }
         for (int i = 0; i < bookQuantity; i++) {
             if (books[i][3].equals(ISBN)) {
-                findIndex = i;
+                isfindIndexx = i;
                 break;
             }
         }
-        if (findIndex != -1) {
-            for (int i = findIndex; i < bookQuantity - 1; i++) {
-                books[i] = books[i + 1];
-            }
-            bookQuantity--;
-            String[][] newBooks = new String[books.length][4];
+        if (isfindIndexx != -1) {
+            String[][] newDeleteBook = new String[books.length][4];
+            int index = 0;
             for (int i = 0; i < books.length; i++) {
-                for (int j = 0; j < books[i].length; j++) {
-                    newBooks[i][j] = books[i][j];
+                if (isfindIndexx != i) {
+                    for (int j = 0; j < books.length; j++) {
+                        newDeleteBook[index] = books[i];
+                    }
+                    index++;
                 }
             }
-            books = newBooks;
-            System.out.println("Kitap Silinmiştir.");
-        } else {
-            System.out.println("Silmek isteğiniz kitap bulunmamaktadır.");
-
+            books = newDeleteBook;
+            System.out.println("Kitap Silindi Liste Güncellendi...");
         }
     }
 
